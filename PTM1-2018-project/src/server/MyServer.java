@@ -19,8 +19,8 @@ public class MyServer implements IServer {
 	public void start(IClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
 		try {
-			server = new ServerSocket(port);
-			server.setSoTimeout(10 * 1000);
+			serverSocket = new ServerSocket(port);
+			serverSocket.setSoTimeout(10 * 1000);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
