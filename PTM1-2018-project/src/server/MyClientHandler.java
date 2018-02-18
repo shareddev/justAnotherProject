@@ -11,8 +11,9 @@ import java.io.OutputStreamWriter;
 public class MyClientHandler implements IClientHandler {
 	
 	//variables
-	private ISolver solver;
+	private ISolver  solver;
 	private ICacheManager cacheManager;
+	private ISolution solution;
 	//some people created these two variables INSIDE their handle method, why?
 	BufferedReader bufferReader;
 	BufferedWriter bufferWriter;
@@ -21,10 +22,12 @@ public class MyClientHandler implements IClientHandler {
 	private String outputBuffer;
 	
 	
-	//Default C'Tor	
+	//Default C'Tor	- if not provided, we assume that the client wants to solve a PipeBoardGame
 	public MyClientHandler() {
+		this.solver = new MySolver<PipeGameBoard>(PipeGameBoard);
 		this(new MyCacheManager(
 				System.getProperty("user.dir") + "\\pipeSolutions\\"));
+	
 	}
 	//Generic C'Tor
 	public MyClientHandler(ICacheManager cacheManager) {
@@ -45,8 +48,8 @@ public class MyClientHandler implements IClientHandler {
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
-		if (this.cacheManager.isExistSolution(this.inputBuffer)) {
-			return this.cacheManager.getSolution(this.inputBuffer);
+		if (this.cacheManager.isExistSolution()) {
+			
 		}
 		else {
 			
@@ -58,9 +61,17 @@ public class MyClientHandler implements IClientHandler {
 	private String bufferedToString(BufferedReader input) throws IOException{
 		String buffer = new String();
 		while (!buffer.contains("done")) {
-			buffer = buffer.concat(input.readLine()).concat("\n");
+			buffer = buffer.concat(input.readLine());
+			if(!buffer.contains("done"))
+				buffer = buffer.concat("\n");
 		}
 		return buffer;
 	 }
+	
+	@Override
+	public ISolver getSolver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

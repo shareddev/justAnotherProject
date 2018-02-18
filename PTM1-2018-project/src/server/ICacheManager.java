@@ -6,6 +6,6 @@ package server;
 public interface ICacheManager {
 	public boolean isExistSolution(String board);
 	public String getSolution();
-	public Solution loadSolution(); 
+	public String loadSolution(); 
 	public void saveSolution(); 
 }

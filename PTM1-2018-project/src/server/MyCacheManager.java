@@ -30,7 +30,7 @@ public class MyCacheManager implements ICacheManager {
 	}
 	
 	@Override
-	public Solution loadSolution() {
+	public String loadSolution() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,3 +44,4 @@ public class MyCacheManager implements ICacheManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+}
