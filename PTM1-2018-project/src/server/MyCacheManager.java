@@ -39,3 +39,8 @@ public class MyCacheManager implements ICacheManager {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public String getSolution() {
+		// TODO Auto-generated method stub
+		return null;
+	}

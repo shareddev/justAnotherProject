@@ -21,14 +21,19 @@ public class MyServer implements IServer {
 	@Override
 	public void start(IClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
-		run();
+		try {
+			this.run();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void stop() {
 		stop = true; 
 	}
 		
-	private void run() {
+	private void run() throws IOException {
 		ServerSocket serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(10000);
 
