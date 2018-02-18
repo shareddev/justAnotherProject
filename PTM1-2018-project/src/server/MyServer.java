@@ -29,7 +29,7 @@ public class MyServer implements IServer {
 	}
 		
 	private void run() {
-		ServerSocket serverSocket =new ServerSocket(port);
+		ServerSocket serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(10000);
 
 		while(!stop)

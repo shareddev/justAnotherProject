@@ -1,7 +1,7 @@
 package server;
 
-public interface ICashManager {
-	public boolean isSolutionExist();
+public interface ICacheManager {
+	public boolean isExistSolution(String board);
 	public Solution loadSolution(); 
 	public void saveSolution(); 
 }
