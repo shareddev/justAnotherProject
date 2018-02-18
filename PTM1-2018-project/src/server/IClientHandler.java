@@ -1,11 +1,10 @@
 package server;
 
-import java.net.Socket;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-/*
- * test for git
- */
+//handles the client
 public interface IClientHandler {
-	void handle(Socket client);
-
+	void handle(InputStream iutput,OutputStream output);
+	
 }
