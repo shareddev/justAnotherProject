@@ -13,6 +13,10 @@ public class MyCashManager implements ICashManager {
 	File solutionsFile;
 	//C'Tor
 	//Default C'Tor, just initialize the solutions map
+	public MyCashManager() {
+		this("");
+	}
+	
 	public MyCashManager(String filePath) {
 		//the HashMap that will save the solutions to RAM
 		this.solutions = new HashMap<>();
