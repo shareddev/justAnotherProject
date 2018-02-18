@@ -2,7 +2,7 @@ package server;
 
 public interface IServer {
 	
-	void start(ClientHandler clientHandler);
+	void start(IClientHandler clientHandler);
 	void stop();
 
 }
