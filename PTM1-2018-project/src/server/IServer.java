@@ -1,8 +1,6 @@
 package server;
 
 public interface IServer {
-	
-	void start(IClientHandler clientHandler);
-	void stop();
-
+	public void start(IClientHandler clientHandler);
+	public void stop();
 }
