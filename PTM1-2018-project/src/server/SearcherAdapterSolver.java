@@ -12,6 +12,12 @@ public class SearcherAdapterSolver<T> implements ISolver<T> {
 	public Solution<T> solve(ISearchable<T> searchable) {
 		return searcher.search(searchable);
 	}
+
+	@Override
+	public String getRequiredChanges(String solution) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

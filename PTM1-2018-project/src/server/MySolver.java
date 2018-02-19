@@ -20,9 +20,5 @@ public class MySolver<T> implements ISolver<T> {
 		return null;
 	}
 
-	@Override
-	public String getRequiredChanges(String solution) {
-		
-	}
 
 }

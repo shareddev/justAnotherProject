@@ -6,5 +6,4 @@ package server;
  */
 public interface ISolver<T> {
 	public Solution<T> solve(ISearchable<T> searchable);
-	public String getRequiredChanges(String solution);
 }
