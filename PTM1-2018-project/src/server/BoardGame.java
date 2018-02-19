@@ -191,6 +191,14 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 
+	private MyTile[][] getBoardGame() {
+		return this.getTiles();
+	}
+
+
+
+
+
 	private Object copyBoard(BoardGame state) {
 		
 	}

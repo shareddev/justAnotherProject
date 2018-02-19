@@ -63,5 +63,51 @@ public class MyTile{
 			return true;
 		else return false;
 	}
-
-}
+	//after testing on PipeGameBoard, need to make this generic, should be (doAction) or something like that
+	//according to the injected or Overrided to a specific game
+	public void rotateTile(int rotate) {
+		for (int i = 0; i < rotate ; i++) {
+			this.rotateThisTile();
+		}
+	}
+	//this is specificly for PipeGameBoard
+	//this rotates THIS tile's value
+	public void rotateThisTile() {	
+		this.setTileValue(rotateByValue(this.getTileValue()));
+	}
+	//this rotates a tile's value by the PipeGameBoard's demands
+	public String rotateByValue(String value) {
+		switch (value) {
+		//do nothing
+		case " ":
+			break;
+		case "-":
+			return "|";
+		case "|":
+			return "-";
+		case "L":
+			return "F";
+		case "F":
+			return "7";
+		case "7":
+			return "J";
+		case "J":
+			return "L";
+			}
+		return null;
+		}
+	//rotates THIS tile's value by X times
+	public void rotateByTimes(int times) {
+		for (int i = 0; i < times ; i++) 
+			this.rotateThisTile();
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
