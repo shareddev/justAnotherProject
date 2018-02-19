@@ -5,7 +5,5 @@ package server;
  * after receiving a game, 
  */
 public interface ISolver<GAME> {
-	public ISolution<GAME> solve(ISearchable<GAME> searchable);
-	
-	
+	public Solution<GAME> solve(ISearchable<GAME> searchable);
 }

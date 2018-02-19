@@ -3,22 +3,28 @@ package server;
 import java.io.File;
 import java.util.HashMap;
 
-public class MyCacheManager implements ICacheManager {
+public class MyCacheManager<GAME> implements ICacheManager {
 
 	//Variables
-	HashMap<String,String> solutions;
+	HashMap<String,GAME> solutions;
 	//a string that saves the file path
 	String filePath;
 	//The file class that will handle our file
 	File solutionsFile;
+	//Solution that the MyCacheManager will return to the IClient
+	Solution<GAME> solution;
+	
 	//C'Tor
-	public MyCacheManager(String filePath) {
+	//Because the MyClientHandler sends a file path by default, we don't need to concern with a 
+	//default C'Tor for MyCacheManager
+	public MyCacheManager(String filePath, Solution<GAME> solution) {
 		//the HashMap that will save the solutions to RAM
 		this.solutions = new HashMap<>();
 		//The filePath string that will be used to save our solutions
 		this.filePath = filePath;
 		//The File class that will handle writing and loading solutions
 		this.solutionsFile = new File(this.filePath);
+		this.solution = solution;
 		
 
 }

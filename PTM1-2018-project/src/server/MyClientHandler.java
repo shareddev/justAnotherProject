@@ -13,7 +13,7 @@ public class MyClientHandler implements IClientHandler {
 	//variables
 	private ISolver  solver;
 	private ICacheManager cacheManager;
-	private ISolution solution;
+	private Solution solution;
 	//some people created these two variables INSIDE their handle method, why?
 	BufferedReader bufferReader;
 	BufferedWriter bufferWriter;
@@ -24,12 +24,11 @@ public class MyClientHandler implements IClientHandler {
 	
 	//Default C'Tor	- if not provided, we assume that the client wants to solve a PipeBoardGame
 	public MyClientHandler() {
-		this.solver = new MySolver<PipeGameBoard>(PipeGameBoard);
-		this(new MyCacheManager(
-				System.getProperty("user.dir") + "\\pipeSolutions\\"));
-	
+		this(new MyCacheManager<String>(
+				System.getProperty("user.dir") + "\\pipeSolutions\\", 
+					new Solution<String>()));	
 	}
-	//Generic C'Tor
+	//C'Tor
 	public MyClientHandler(ICacheManager cacheManager) {
 		this.cacheManager = cacheManager;		
 		}

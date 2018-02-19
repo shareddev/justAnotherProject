@@ -1,5 +1,6 @@
 package server;
 
 public interface ISearcher<GAME> {
-	public ISolution<GAME> search(ISearchable<GAME> searchable);
+	public Solution<GAME> search(ISearchable<GAME> searchable);
+	public int getNumOfEvaluatedNodes();
 }
