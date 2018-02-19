@@ -15,7 +15,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	
 	private int numberOfRows;
 	private int numberOfColumns;
-
+	
 	//C'Tor
 	public BoardGame(String board) {
 		//counting the numberOfRows and numberOfColumns
@@ -27,6 +27,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		//setting the current tile as Source tile for our future ISearcher algorithms
 		setCurrentTile(this.source);
 	}
+	
 	
 
 
@@ -152,12 +153,42 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 			
 			if(!compare.equals(" ") && !compare.equals("s") 
 					&& !compare.equals("g")) {
-				if(compare.equals("-") || compare.equals("|")) {
-					
-				}
+				if(compare.equals("-") || compare.equals("|"))
+					rotateNeighbotingTile(possibleStatesList, newState, sourceState,
+							neighboringStates,2,i);
+				else rotateNeighbotingTile(possibleStatesList, newState, sourceState,
+						neighboringStates,4,i);
 			}
 		}
+		return possibleStatesList;
 	}
+
+
+	//Rotating according to the PipeGame, need to ajust after testing
+	private void rotateNeighbotingTile(ArrayList<State<BoardGame>> possibleStatesList, 
+			State<BoardGame> newState,State<BoardGame> sourceState, 
+				ArrayList<MyTile> neighboringStates, int timesToRotate, int i) {
+		//resetting the given newState to add to the possibleStatesList
+		for (int j = 1 ; j < timesToRotate ; j++) {
+			newState = new State<BoardGame>(copyBoard(sourceState.getState()), 
+					calCost(newState.getState(), sourceState));
+			newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()]
+												[neighboringStates.get(i).getTileColumn()]
+														.rotateTile(j);
+			newState.getState().setCurrentTile(newState.getState().getBoardGame()
+					[neighboringStates.get(i).getTileRow()][neighboringStates.get(i).getTileColumn()]);
+			
+		}
+	}
+
+
+
+
+	private Object copyBoard(BoardGame state) {
+		
+	}
+
+
 
 
 
