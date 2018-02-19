@@ -51,6 +51,9 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	}
 	
 	//Getters
+	public MyTile[][] getTiles() {
+		return this.tiles;
+	}
 	public MyTile getGoal() {
 		return this.goal;
 	}
@@ -60,10 +63,10 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	public MyTile getCurrent() {
 		return this.current;
 	}
-	public int getRows() {
+	public int getNumberOfRows() {
 		return this.numberOfRows;
 	}
-	public int getColumns() {
+	public int getNumberOfColumns() {
 		return this.numberOfColumns;
 	}
 	
@@ -99,6 +102,24 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		if (object == this)
 			return true;
 		else return this.equals((BoardGame) object);
+	}
+	
+	//going over each tile from tiles, copying the Column, Row, Value and finishes the 
+	//row with an "\n"
+	//at the end of the we add "done\n" to indicate that we got the entire board
+	@Override
+	public String toString() {
+		String string = new String("");
+		for (int i = 0; i < this.getNumberOfRows(); i++) {
+			for (int j = 0; j < this.getNumberOfColumns(); j++) {
+				string = string.concat(
+						this.getTiles()[i][j].toString()).concat(
+								this.getTiles()[i][j].getTileValue()).concat("\n");
+			}
+			string = string.concat("done\n");
+		}
+		
+		return string;
 	}
 	
 	

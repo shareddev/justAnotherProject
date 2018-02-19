@@ -4,8 +4,8 @@ public class MyTile{
 	
 	//variables
 	//the Tile's location by a row and column number
-	private int row;
 	private int column;
+	private int row;
 	//The value that the Tile needs to hold
 	private String value;
 	
@@ -24,8 +24,8 @@ public class MyTile{
 	
 	//Copy C'Tor
 	public MyTile(MyTile tile) {
-		this(tile.getTileColumn(), this.value = tile.getTileValue(),
-				tile.getTileRow());
+		this(tile.getTileColumn(),tile.getTileRow(), 
+				tile.getTileValue());
 	}
 	
 	//Setter for the Row and column of the Tile
@@ -52,7 +52,8 @@ public class MyTile{
 	}
 	//according to the protocol provided by the client
 	public String toString() {
-		return (new String("{" + this.getTileColumn() + "," + this.getTileRow() + "}"));
+		//return (new String("{" + this.getTileColumn() + "," + this.getTileRow() + "}"));
+		return (new String(this.getTileColumn() + "," + this.getTileRow()));
 	}
 	
 	//for comparison between this tile and a provided one
