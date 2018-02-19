@@ -12,7 +12,8 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 	//C'Tor
 	public BoardGame(ITile tiles[][], ITile current, int numberOfRows, int numberOfColumes) {
-		
+		this(tiles, null, null, current, numberOfRows, numberOfColumes);
+		this.setStartAndGoal(this.tiles);
 		
 	}
 	public BoardGame(ITile tiles[][], ITile start, ITile goal, 
@@ -37,13 +38,14 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		return this.current;
 	}
 	
-	private void setStartAndGoal(ITile[][] boardGame) {
+	//setting the Start ITile and Goal ITile
+	private void setStartAndGoal(ITile[][] tiles) {
 		for (int i = 0; i < this.numberOfColumes; i++) {
 			for (int j = 0; j < this.numberOfRows ; j++) {
-				if (boardGame[j][i].getTileValue().equals('g'))
-					this.goal = boardGame[j][i];
-				else if (boardGame[j][i].getTileValue().equals('s'))
-					this.start = boardGame[j][i];
+				if (tiles[j][i].getTileValue().equals('g'))
+					this.goal = tiles[j][i];
+				else if (tiles[j][i].getTileValue().equals('s'))
+					this.start = tiles[j][i];
 			}
 			
 		}

@@ -1,6 +1,6 @@
 package server;
 
-public class PipeGameBoard extends BoardGame<String> {
+public class PipeGameBoard extends BoardGame {
 	//variables
 
 	public PipeGameBoard() {
