@@ -27,7 +27,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		this.tiles = new MyTile[this.numberOfRows][this.numberOfColumns];
 		for (int i = 0; i < this.numberOfColumns; i++) {
 			for (int j = 0; j < this.numberOfRows; j++) {
-				
+				this.tiles[i][j].setTileRowColumn(i, j);
 				this.tiles[i][j].se = Character.toString(board.charAt(0));
 			}
 		}
