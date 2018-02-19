@@ -22,6 +22,7 @@ public class MyServer implements IServer {
 	public void start(IClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
 		try {
+			//run private method from start();
 			run();
 		} catch (Exception e) {}
 	}
