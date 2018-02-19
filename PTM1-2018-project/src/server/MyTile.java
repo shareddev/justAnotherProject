@@ -1,6 +1,6 @@
 package server;
 
-public abstract class MyTile{
+public class MyTile{
 	
 	//variables
 	//the Tile's location by a row and column number
@@ -21,6 +21,14 @@ public abstract class MyTile{
 		setTileRowColumn(column, row);
 		this.value = value;
 	}
+	
+	//Copy C'Tor
+	public MyTile(MyTile tile) {
+		this.row = tile.getTileRow();
+		this.column = tile.getTileColumn();
+		this.value = tile.getTileValue();
+	}
+	
 	//Setter for the Row and column of the Tile
 	public void setTileRowColumn(int column, int row) {
 		this.column = column;
@@ -45,7 +53,7 @@ public abstract class MyTile{
 	}
 	//according to the protocol provided by the client
 	public String toString() {
-		return (new String("{" + this.getTileRow() + "," + this.getTileColumn() + "}"));
+		return (new String("{" + this.getTileColumn() + "," + this.getTileRow() + "}"));
 	}
 	
 	//for comparison between this tile and a provided one

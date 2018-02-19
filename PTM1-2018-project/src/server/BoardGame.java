@@ -38,13 +38,12 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	
 	//counting the number of Rows and Columns that String holds
 	private void setFromStringNumberOfColumnsAndRows(String board) {
-		this.numberOfColumns = 0;
-		this.numberOfRows = 0;
-		//splitting the board to a String[] array
+		/*splitting the board to a String[] array
+		 *the number of Strings in the String[] array are the number of
+		 *rows we have
+		 *the number of characters each string holds is the number of Columns
+		*/
 		String[] splitter = board.split("\n");
-		//the number of Strings in the String[] array are the number of
-		//rows we have
-		//the number of characters each string holds is the number of Columns
 		this.numberOfColumns = splitter[0].length();
 		this.numberOfRows = splitter.length;
 	}
@@ -72,10 +71,14 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		for (int i = 0; i < this.numberOfRows; i++) {
 			for (int j = 0; j < this.numberOfColumns ; j++) {
 				if (tiles[j][i].getTileValue().equals("g"))
-					this.goal = tiles[j][i];
+					this.goal = new MyTile(tiles[j][i]);
 				else if (tiles[j][i].getTileValue().equals("s"))
-					this.source = tiles[j][i];
+					this.source  = new MyTile(tiles[j][i]);
 			}
+			//if we found both Source and Goal, we stop the loop
+			if (this.goal.getTileValue().equals("g")
+					&& this.source.getTileValue().equals("s"))
+				break;
 		}
 	}
 	//Override
