@@ -1,15 +1,15 @@
 package server;
 //The object adapter that bridges between ISearcher to ISolver
-public class SearcherAdapterSolver<GAME> implements ISolver<GAME> {
+public class SearcherAdapterSolver<T> implements ISolver<T> {
 
-	private ISearcher<GAME> searcher;
+	private ISearcher<T> searcher;
 	
-	public SearcherAdapterSolver(ISearcher<GAME> searcher) {
+	public SearcherAdapterSolver(ISearcher<T> searcher) {
 		this.searcher = searcher;
 	}
 	
 	@Override
-	public Solution<GAME> solve(ISearchable<GAME> searchable) {
+	public Solution<T> solve(ISearchable<T> searchable) {
 		return searcher.search(searchable);
 	}
 	

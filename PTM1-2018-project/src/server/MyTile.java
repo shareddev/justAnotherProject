@@ -47,7 +47,7 @@ public abstract class MyTile{
 	}
 	
 	//for comparison between this tile and a provided one
-	public boolean equals(ITile tile) {
+	public boolean equals(MyTile tile) {
 		if (this.getTileColumn() == tile.getTileColumn() 
 				&& this.getTileRow() == tile.getTileRow())
 			return true;
