@@ -1,5 +1,6 @@
 package server;
 
+
 public class MySolver<T> implements ISolver<T> {
 
 	//variables
@@ -8,7 +9,7 @@ public class MySolver<T> implements ISolver<T> {
 	//has to be for same kind of GAME as the ISolver
 	private ISearchable<T> searchable;
 	//can be bfs, dfs, HillClimbing
-	private ISearcher searcher;
+	private ISearcher<T> searcher;
 	
 	public MySolver(ISearcher<T> searcher) {
 		this.solver = new SearcherAdapterSolver<T>(searcher);
