@@ -24,9 +24,8 @@ public class MyTile{
 	
 	//Copy C'Tor
 	public MyTile(MyTile tile) {
-		this.row = tile.getTileRow();
-		this.column = tile.getTileColumn();
-		this.value = tile.getTileValue();
+		this(tile.getTileColumn(), this.value = tile.getTileValue(),
+				tile.getTileRow());
 	}
 	
 	//Setter for the Row and column of the Tile

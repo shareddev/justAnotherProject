@@ -20,6 +20,8 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		setTilesFromString(board);
 		//setting the values in the tiles
 		setStartAndGoal();
+		//setting the current tile as Source tile for our future ISearcher algorithms
+		this.current = this.source;
 	}
 	
 
@@ -48,7 +50,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		this.numberOfRows = splitter.length;
 	}
 	
-	
+	//Getters
 	public MyTile getGoal() {
 		return this.goal;
 	}
