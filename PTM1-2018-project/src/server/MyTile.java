@@ -1,6 +1,6 @@
 package server;
 
-public abstract class MyTile implements ITile {
+public abstract class MyTile{
 	
 	//variables
 	//the Tile's location by a row and column number
@@ -20,29 +20,24 @@ public abstract class MyTile implements ITile {
 		this.value = value;
 	}
 	//Setter for the Row and column of the Tile
-	@Override
 	public void setTileRowColumn(int row, int column) {
 		this.row = row;
 		this.column = column;
 	}
 
 	//Getters
-	@Override
 	public int getTileRow() {
 		return this.row;
 	}
 
-	@Override
 	public int getTileColumn() {
 		return this.column;
 	}
 
-	@Override
 	public void setTileValue(String value) {
 		this.value = value;
 	}
 
-	@Override
 	public String getTileValue() {
 		return this.value;
 	}

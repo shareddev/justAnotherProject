@@ -1,5 +1,5 @@
 package server;
-//The class adapter that bridges between ISearcher to ISolver
+//The object adapter that bridges between ISearcher to ISolver
 public class SearcherAdapterSolver<GAME> implements ISolver<GAME> {
 
 	private ISearcher<GAME> searcher;

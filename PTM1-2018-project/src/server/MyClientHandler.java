@@ -40,7 +40,8 @@ public class MyClientHandler implements IClientHandler {
 	//Methods
 	@Override
 	//gets a client input and output from IServer
-	public void handleClient(InputStream input, OutputStream output) throws IOException {
+	public void handleClient(InputStream input, 
+			OutputStream output) {
 		//converts the input and output stream into Strings
 		bufferReader = new BufferedReader(new InputStreamReader(input));
 		//other people from class said it's better to use PrintWriter, need to test
@@ -100,6 +101,12 @@ public class MyClientHandler implements IClientHandler {
 	public ISolver getSolver() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	//converts a boardGame to a unique String identifier to make sure
+	//we're talking about the same game when sending to the ICacheManager
+	public String stringToUnique(String string) {
+		
 	}
 
 }

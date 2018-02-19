@@ -21,12 +21,8 @@ public class MyServer implements IServer {
 	@Override
 	public void start(IClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
-		try {
-			this.run();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		run();
+
 	}
 	
 	public void stop() {

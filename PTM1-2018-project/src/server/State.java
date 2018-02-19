@@ -1,24 +1,31 @@
 package server;
 
-public class State<GAME> implements Comparable<State<GAME>> {
+import java.io.Serializable;
+
+public class State<T> implements Comparable<State<T>>, Serializable {
 	
-	private GAME state; //the current state
-	private double cost; //the cost to reach the current state
-	private State<GAME> cameFrom; //the previous state to the current one
+	//setting the Serializable version
+	private static final long serialVersionUID = 1L;
+	//the current state
+	private T state; 
+	//the cost to reach the current state
+	private double cost; 
+	//the previous state to the current one
+	private State<T> cameFrom; 
 	
 
 	//C'tor
-	public State(GAME state) {
+	public State(T state) {
 		this(state, 0.0, null);
 	}
-	public State(GAME state, double cost, State<GAME> cameFrom) {
+	public State(T state, double cost, State<T> cameFrom) {
 		this.state = state;
 		this.cost = cost;
 		this.cameFrom = cameFrom;
 	}
 	
 	@Override
-	public int compareTo(State<GAME> compare) {
+	public int compareTo(State<T> compare) {
 		if (this.state.equals(compare.getState()) 
 				&& this.cameFrom == compare.cameFrom)
 			return 1;
@@ -26,14 +33,14 @@ public class State<GAME> implements Comparable<State<GAME>> {
 	}
 	
 	
-	public GAME getState() {
+	public T getState() {
 		return this.state;
 	}
 	
 	public double getCost() {
 		return this.cost;
 	}
-	public State<GAME> getCameFrom(){
+	public State<T> getCameFrom(){
 		return this.cameFrom;
 	}
 	
@@ -45,7 +52,7 @@ public class State<GAME> implements Comparable<State<GAME>> {
 	//isn't equals part of object class?
 	//need to ask Nathan if he knows
 	//@Override
-	public boolean equals(State<GAME> compare) {
+	public boolean equals(State<T> compare) {
 		if(this.getState().equals(compare.getState()))
 			return true;
 		else return false;
