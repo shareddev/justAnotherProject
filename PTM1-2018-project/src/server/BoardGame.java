@@ -22,21 +22,31 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	}
 	
 
-	//going over each character fron the board string, using our knowlendge of the 
+	//going over each character from the board string, using our knowlendge of the 
 	private void setTilesFromString(String board) {
 		this.tiles = new MyTile[this.numberOfRows][this.numberOfColumns];
 		for (int i = 0; i < this.numberOfColumns; i++) {
 			for (int j = 0; j < this.numberOfRows; j++) {
 				this.tiles[i][j].setTileRowColumn(i, j);
-				this.tiles[i][j].se = Character.toString(board.charAt(0));
+				this.tiles[i][j].setTileValue(
+						Character.toString(board.charAt(0)));
 			}
 		}
 	}
-
+	
+	//counting number of rows by number of splitting string 
 	private int getFromStringNumberOfRows(String board) {
-		// TODO Auto-generated method stub
-		return 0;
+		//this string splits the board into number of rows
+		String[] splitter = board.split("\n");
+		int i = 0;
+		for (String string : splitter) {
+			if (!splitter.equals("done"))
+				i++;
+		}
+		return i;
 	}
+	
+	
 
 	private int getFromStringNumberOfColumns(String board) {
 		// TODO Auto-generated method stub
