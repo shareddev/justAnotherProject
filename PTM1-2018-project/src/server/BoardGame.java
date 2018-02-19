@@ -177,7 +177,14 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 														.rotateTile(j);
 			newState.getState().setCurrentTile(newState.getState().getBoardGame()
 					[neighboringStates.get(i).getTileRow()][neighboringStates.get(i).getTileColumn()]);
-			
+			if (isCanConnect(newState.getState().getBoardGame()
+					[sourceState.getState().getCurrent().getTileRow()]
+							[sourceState.getState().getCurrent().getTileColumn()],
+							newState.getState().getBoardGame()
+							[newState.getState().getNumberOfRows()]
+									[newState.getState().getNumberOfColumns()] 
+											&& !isExistLoop(newState))) 
+				possibleStatesList.add(newState);
 		}
 	}
 
