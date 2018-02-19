@@ -16,6 +16,9 @@ public class State<T> implements Comparable<State<T>>, Serializable {
 	
 
 	//C'tor
+	public State() {
+		this(null);
+	}
 	public State(T state) {
 		this(state, 0.0, null);
 	}

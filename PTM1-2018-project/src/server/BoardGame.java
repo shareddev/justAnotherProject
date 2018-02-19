@@ -139,9 +139,24 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 				new ArrayList<State<BoardGame>>();
 		
 		//creating a list of possible changes of the "Neighboring" States
-		ArrayList<State<BoardGame>> neighboringStates = new ArrayList<MyTile>(
+		ArrayList<MyTile> neighboringStates = new ArrayList<MyTile>(
 				sourceState.getState().getNeighboringTiles(
 						sourceState.getState().getCurrent()));
+		
+		//creating a temporary State for each iteration of a State
+		State<BoardGame> newState = new State<BoardGame>();
+		
+		for (int i = 0; i < neighboringStates.size() ; i++) {
+			String compare = new String("");
+			compare = neighboringStates.get(i).getTileValue();
+			
+			if(!compare.equals(" ") && !compare.equals("s") 
+					&& !compare.equals("g")) {
+				if(compare.equals("-") || compare.equals("|")) {
+					
+				}
+			}
+		}
 	}
 
 
