@@ -14,18 +14,35 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 	//C'Tor
 	public BoardGame(String board) {
+		//counting the numberOfRows and numberOfColumns
+		this.numberOfColumns = getFromStringNumberOfColumns(board);
+		this.numberOfColumns = getFromStringNumberOfRows(board);
 		//converting the String the represents a board to a 2D MyTiles array
 		setTilesFromString(board);
 	}
 	
+
 	//going over each character fron the board string, using our knowlendge of the 
 	private void setTilesFromString(String board) {
-		for ( Character character : board.toCharArray()) {
-			
-			
+		this.tiles = new MyTile[this.numberOfRows][this.numberOfColumns];
+		for (int i = 0; i < this.numberOfColumns; i++) {
+			for (int j = 0; j < this.numberOfRows; j++) {
+				
+				this.tiles[i][j].se = Character.toString(board.charAt(0));
+			}
 		}
 	}
 
+	private int getFromStringNumberOfRows(String board) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private int getFromStringNumberOfColumns(String board) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	/*public BoardGame(MyTile tiles[][], MyTile start, MyTile goal, 
 			MyTile current, int numberOfRows, int numberOfColumns) {
 		
