@@ -20,4 +20,9 @@ public class MySolver<GAME> implements ISolver<GAME> {
 		return null;
 	}
 
+	@Override
+	public String getRequiredChanges(String solution) {
+		
+	}
+
 }

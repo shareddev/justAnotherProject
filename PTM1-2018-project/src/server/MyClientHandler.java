@@ -58,7 +58,7 @@ public class MyClientHandler implements IClientHandler {
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
 		if(this.cacheManager.isExistSolution(uniqueCheck)) {
-			writeSolutionToClient(this.cacheManager.getSolution(uniqueCheck), bufferWriter);
+			writeSolutionToClient(this.solver.getRequiredChanges(this.cacheManager.getSolution(uniqueCheck)), bufferWriter);
 		}
 		else {
 			
