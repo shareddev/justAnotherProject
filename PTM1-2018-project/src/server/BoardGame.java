@@ -180,14 +180,177 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 					[neighboringStates.get(i).getTileRow()][neighboringStates.get(i).getTileColumn()]);
 			if (isCanConnect(newState.getState().getBoardGame()
 					[sourceState.getState().getCurrent().getTileRow()]
-							[sourceState.getState().getCurrent().getTileColumn()],
-							newState.getState().getBoardGame()
+							[sourceState.getState().getCurrent().getTileColumn()]
+							,newState.getState().getBoardGame()
 							[newState.getState().getNumberOfRows()]
-									[newState.getState().getNumberOfColumns()] 
-											&& !isExistLoop(newState))) 
+									[newState.getState().getNumberOfColumns()]) 
+											&& !isExistLoop(newState)) 
 				possibleStatesList.add(newState);
 		}
 	}
+
+
+
+	private boolean isCanConnect(MyTile current, MyTile next) {
+		String currentValue = new String(current.getTileValue());
+		String nextValue = new String(next.getTileValue());
+		
+		if(currentValue.equals("s") || currentValue.equals("g")
+		{
+			// checking right
+			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			{
+				if(next.getTileValue().equals("-") || next.getTileValue()=='7' ||next.getTileValue()=='J')
+					return true;
+			}	
+			// checking left?
+			else if(next.getTileColumn()<currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			{
+				if(next.getTileValue().equals("-") || next.getTileValue()=='L' ||next.getTileValue()=='F')
+					return true;
+			}
+			
+			// checking down?
+			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()>currentValue.getRow())
+			{
+				if(next.getTileValue()'|' || next.getTileValue()=='L' ||next.getTileValue()=='J')
+					return true;
+			}
+			
+			// checking up?
+			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()<currentValue.getRow())
+			{
+				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F')
+					return true;
+			}
+		}
+		else if(currentValue.getTileValue()=='|')
+		{
+			// checking down?
+			if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()>currentValue.getRow())
+			{
+				if(next.getTileValue()=='|' || next.getTileValue()=='L' || next.getTileValue()=='J'|| next.getTileValue()=='g')
+					return true;
+			}
+			
+			// checking up?
+			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()<currentValue.getRow())
+			{
+				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
+					return true;
+			}
+		}
+		
+		else if(currentValue.getTileValue()=='-')
+		{
+			// neigbor from right?
+			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			{
+				if(next.getTileValue()=='-' || next.getTileValue()=='7' ||next.getTileValue()=='J'|| next.getTileValue()=='s')
+					return true;
+			}	
+			// checking left?
+			else if(next.getTileColumn()<currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			{
+				if(next.getTileValue()=='-' || next.getTileValue()=='L' ||next.getTileValue()=='F'|| next.getTileValue()=='s')
+					return true;
+			}
+		}
+		else if(currentValue.getTileValue()=='F')
+		{
+			// neigbor from right?
+			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			{
+				if(next.getTileValue()=='-' || next.getTileValue()=='7' ||next.getTileValue()=='J'|| next.getTileValue()=='g')
+					return true;
+			}
+			
+			// neigbor from down?
+			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()>currentValue.getRow())
+			{
+				if(next.getTileValue()=='|' || next.getTileValue()=='L' ||next.getTileValue()=='J'|| next.getTileValue()=='g')
+					return true;
+			}
+		}
+		
+		else if(currentValue.getTileValue()=='L')
+		{
+			// neigbor from right?
+			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			{
+				if(next.getTileValue()=='-' || next.getTileValue()=='7' ||next.getTileValue()=='J'|| next.getTileValue()=='g')
+					return true;
+			}
+			
+			// neigbor from up?
+			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()<currentValue.getRow())
+			{
+				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
+					return true;
+			}
+		}
+		
+		else if(currentValue.getTileValue()=='7')
+		{
+			// neigbor from left?
+			if(neighbor.getTileColumn()<currentTile.getTileColumn() && neighbor.getRow()==currentTile.getRow())
+			{
+				if(neighbor.getValue()=='-' || neighbor.getValue()=='L' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
+					return true;
+			}
+			// neigbor from down?
+			else if(neighbor.getTileColumn()==currentTile.getTileColumn() && neighbor.getRow()>currentTile.getRow())
+			{
+				if(neighbor.getValue()=='|' || neighbor.getValue()=='L' || neighbor.getValue()=='J'|| neighbor.getValue()=='g')
+					return true;
+			}
+		}
+		
+		else if(currentTile.getValue()=='J')
+		{
+			// neigbor from left?
+			if(neighbor.getTileColumn()<currentTile.getTileColumn() && neighbor.getRow()==currentTile.getRow())
+			{
+				if(neighbor.getValue()=='-' || neighbor.getValue()=='L' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
+					return true;
+			}
+			//neigbor from up?
+			else if(neighbor.getTileColumn()==currentTile.getTileColumn() && neighbor.getRow()<currentTile.getRow())
+			{
+				if(neighbor.getValue()=='|' || neighbor.getValue()=='7' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
+					return true;
+			}
+			
+		}
+		return false;
+	}
+
+
+
+
+
+	private boolean isExistLoop(State<BoardGame> newState) {
+		State<BoardGame> previousState = new State<BoardGame>();
+		
+		if (newState.getCameFrom() == null) {
+			return false;
+		}
+		else {
+			previousState = newState.getCameFrom();
+			while(previousState.getCameFrom() != null) {
+				if(previousState.getState() != null
+						&& newState.getState().getCurrent().equals(previousState.getState().getCurrent())
+						&& newState.getState().getCurrent().toString().equals(previousState.getState().getCurrent().toString())) {
+					newState = previousState;
+					return true;
+				}
+				previousState = previousState.getCameFrom();
+			}
+		}
+		return false;
+	}
+
+
 
 
 
