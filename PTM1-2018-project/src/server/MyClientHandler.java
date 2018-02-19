@@ -58,13 +58,32 @@ public class MyClientHandler implements IClientHandler {
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
 		if(this.cacheManager.isExistSolution(uniqueCheck)) {
-			writeToClient(this.cacheManager.getSolution(uniqueCheck), bufferWriter);
+			writeSolutionToClient(this.cacheManager.getSolution(uniqueCheck), bufferWriter);
+		}
+		else {
+			
 		}
 			
 	}
 
-	private void writeToClient(String solution, BufferedWriter bufferWriter) {
-		bufferWriter.wr
+	private void writeSolutionToClient(String solution, PrintWriter bufferWriter) {
+		convertStringToPrintWriter(solution, bufferWriter);
+	}
+	//Converting the solution from a String to a PrintWriter
+	private void convertStringToPrintWriter(String solution, PrintWriter bufferWriter) {
+		String buffer = new String("");
+		for (Character character : solution.toCharArray()) {
+			if(character != '\n')
+				buffer = buffer.concat(Character.toString(character));
+			else {
+				buffer = buffer.concat("\n");
+				bufferWriter.write(buffer);
+				bufferWriter.flush();
+				buffer = "";
+			}
+		}
+		bufferWriter.println("done\n");
+		bufferWriter.flush();
 	}
 	//this method converts the buffer we got from the client
 	//to a string.
