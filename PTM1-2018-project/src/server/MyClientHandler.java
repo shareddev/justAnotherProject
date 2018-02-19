@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 public class MyClientHandler implements IClientHandler {
 	
@@ -17,10 +18,11 @@ public class MyClientHandler implements IClientHandler {
 	private Solution solution;
 	//some people created these two variables INSIDE their handle method, why?
 	BufferedReader bufferReader;
-	BufferedWriter bufferWriter;
+	PrintWriter bufferWriter;
 	//buffer string to handle messages from and to the client
 	private String inputBuffer;
 	private String outputBuffer;
+	
 	
 	
 	//Default C'Tor	- if not provided, we assume that the client wants to solve a PipeBoardGame
@@ -28,7 +30,7 @@ public class MyClientHandler implements IClientHandler {
 		this(new MyCacheManager(
 				System.getProperty("user.dir") + "\\pipeSolutions\\", 
 					new Solution<String>()));	
-		this.searchable = new PipeGameBoard();
+		this.searchable = new PipeGameBoard(); 
 	}
 	//C'Tor
 	public MyClientHandler(ICacheManager cacheManager) {
@@ -42,28 +44,28 @@ public class MyClientHandler implements IClientHandler {
 		//converts the input and output stream into Strings
 		bufferReader = new BufferedReader(new InputStreamReader(input));
 		//other people from class said it's better to use PrintWriter, need to test
-		bufferWriter = new BufferedWriter(new OutputStreamWriter(output));
+		bufferWriter = new PrintWriter(new OutputStreamWriter(output));
 		
 		//converting the bufferReader to a string
 		this.inputBuffer = bufferedToString(bufferReader);
 		
-		String uniqueCheck = stringToUnique(this.inputBuffer);
+		//we're using the stringToUnique via the ISearchable because the uniqueness of the string
+		//is determined by the values the tiles in the board hold, thus the kind of Game will
+		//decide how to recognize each tile.
+		String uniqueCheck = this.searchable.stringToUnique(inputBuffer);
 		
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
-		if (this.cacheManager.getSolution() == null) {
-			
+		if(this.cacheManager.isExistSolution(uniqueCheck)) {
+			writeToClient(this.cacheManager.getSolution(uniqueCheck), bufferWriter);
 		}
-		else {
 			
-		}
 	}
 
-	private String BoardToUnique(String inputBuffer) {
-		
+	private void writeToClient(String solution, BufferedWriter bufferWriter) {
+		bufferWriter.wr
 	}
-	
 	//this method converts the buffer we got from the client
 	//to a string.
 	private String bufferedToString(BufferedReader input) throws IOException{
