@@ -171,7 +171,8 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		//resetting the given newState to add to the possibleStatesList
 		for (int j = 1 ; j < timesToRotate ; j++) {
 			newState = new State<BoardGame>(copyBoard(sourceState.getState()), 
-					calCost(newState.getState(), sourceState));
+					calCost(newState.getState()), sourceState);
+			
 			newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()]
 												[neighboringStates.get(i).getTileColumn()]
 														.rotateTile(j);
@@ -190,6 +191,18 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 
+	//calculating a cost to the goal State, but i don't think
+	//this is a good way, better fix it
+	private double calCost(BoardGame state) {
+		return Double.valueOf(Math.abs(state.getCurrent().getTileColumn() - 
+				state.getGoal().getTileColumn() + 
+				Math.abs(state.getCurrent().getTileRow() - 
+						state.getGoal().getTileRow())));
+	}
+
+
+
+
 
 	private MyTile[][] getBoardGame() {
 		return this.getTiles();
@@ -199,8 +212,8 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 
-	private Object copyBoard(BoardGame state) {
-		
+	private BoardGame copyBoard(BoardGame board) {
+		return
 	}
 
 
