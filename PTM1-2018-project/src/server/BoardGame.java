@@ -1,4 +1,8 @@
 package server;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 //i might be over complicating this, mayne PipeGameBoard is really just enough
 public abstract class BoardGame implements ISearchable<BoardGame> {
 	//Nathan said that we might want to change the 2-Dim array
@@ -21,7 +25,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		//setting the values in the tiles
 		setStartAndGoal();
 		//setting the current tile as Source tile for our future ISearcher algorithms
-		this.current = this.source;
+		setCurrentTile(this.source);
 	}
 	
 
@@ -68,6 +72,10 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	}
 	public int getNumberOfColumns() {
 		return this.numberOfColumns;
+	}
+	//Setters
+	public void setCurrentTile(MyTile newCurrent) {
+		this.current = newCurrent;
 	}
 	
 	//setting the Start MyTile and Goal MyTile
@@ -118,8 +126,30 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 			}
 			string = string.concat("done\n");
 		}
-		
 		return string;
+	}
+	
+	//getting all possible states that our board can produce
+	@Override
+	public Collection<State<BoardGame>> getAllStates(
+			State<BoardGame> sourceState){
+		
+		//setting an ArrayList to hold all the possible states we will create
+		ArrayList<State<BoardGame>> possibleStatesList = 
+				new ArrayList<State<BoardGame>>();
+		
+		//creating a list of possible changes of the "Neighboring" States
+		Arraylist<State<BoardGame>> neighboringStates = new ArrayList<MyTile>(
+				sourceState.getState().getNeighboringTiles(
+						sourceState.getState().getCurrent()));
+	}
+
+
+
+
+	private Collection<MyTile> getNeighboringTiles(MyTile current) {
+		
+		return null;
 	}
 	
 	

@@ -1,7 +1,8 @@
 package server;
 
 import java.io.Serializable;
-
+//a State represents an entire board
+//the board will be represented by a String
 public class State<T> implements Comparable<State<T>>, Serializable {
 	
 	//setting the Serializable version
