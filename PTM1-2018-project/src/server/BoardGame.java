@@ -14,10 +14,19 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 	//C'Tor
 	public BoardGame(String board) {
-		//need to convert a string to a tiles[][]
+		//converting the String the represents a board to a 2D MyTiles array
+		setTilesFromString(board);
+	}
+	
+	//going over each character fron the board string, using our knowlendge of the 
+	private void setTilesFromString(String board) {
+		for ( Character character : board.toCharArray()) {
+			
+			
+		}
 	}
 
-	public BoardGame(MyTile tiles[][], MyTile start, MyTile goal, 
+	/*public BoardGame(MyTile tiles[][], MyTile start, MyTile goal, 
 			MyTile current, int numberOfRows, int numberOfColumns) {
 		
 		this.tiles = tiles;
@@ -27,7 +36,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		this.numberOfRows = numberOfRows;
 		this.numberOfColumns = numberOfColumns;
 		
-	}
+	}*/
 	
 	public MyTile getGoal() {
 		return this.goal;
