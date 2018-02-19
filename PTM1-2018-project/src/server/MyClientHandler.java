@@ -66,11 +66,10 @@ public class MyClientHandler implements IClientHandler {
 			
 	}
 
-	private void writeSolutionToClient(String solution, PrintWriter bufferWriter) {
-		convertStringToPrintWriter(solution, bufferWriter);
-	}
 	//Converting the solution from a String to a PrintWriter
-	private void convertStringToPrintWriter(String solution, PrintWriter bufferWriter) {
+	//making sure that each and every rotation is sent with a tiny delay (not a single message)
+	//so the rotations in the client would happen one after the other
+	private void writeSolutionToClient(String solution, PrintWriter bufferWriter) {
 		String buffer = new String("");
 		for (Character character : solution.toCharArray()) {
 			if(character != '\n')
@@ -84,7 +83,7 @@ public class MyClientHandler implements IClientHandler {
 		}
 		bufferWriter.println("done\n");
 		bufferWriter.flush();
-	}
+		}
 	//this method converts the buffer we got from the client
 	//to a string.
 	private String bufferedToString(BufferedReader input) throws IOException{
