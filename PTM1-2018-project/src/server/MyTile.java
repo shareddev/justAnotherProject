@@ -10,19 +10,21 @@ public abstract class MyTile{
 	private String value;
 	
 	//C'Tor
+	public MyTile() {
+		this("");
+	}
 	public MyTile(String value) {
 		this(0, 0,value);
 	}
 	
-	public MyTile(int row, int column, String value) {
-		this.row = row;
-		this.column = column;
+	public MyTile(int column, int row, String value) {
+		setTileRowColumn(column, row);
 		this.value = value;
 	}
 	//Setter for the Row and column of the Tile
-	public void setTileRowColumn(int row, int column) {
-		this.row = row;
+	public void setTileRowColumn(int column, int row) {
 		this.column = column;
+		this.row = row;
 	}
 
 	//Getters
