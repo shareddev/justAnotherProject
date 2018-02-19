@@ -15,55 +15,40 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	//C'Tor
 	public BoardGame(String board) {
 		//counting the numberOfRows and numberOfColumns
-		this.numberOfColumns = getFromStringNumberOfColumns(board);
-		this.numberOfColumns = getFromStringNumberOfRows(board);
+		setFromStringNumberOfColumnsAndRows(board);
 		//converting the String the represents a board to a 2D MyTiles array
 		setTilesFromString(board);
+		//setting the values in the tiles
+		setStartAndGoal();
 	}
 	
 
+
+
 	//going over each character from the board string, using our knowlendge of the 
 	private void setTilesFromString(String board) {
-		this.tiles = new MyTile[this.numberOfRows][this.numberOfColumns];
-		for (int i = 0; i < this.numberOfColumns; i++) {
-			for (int j = 0; j < this.numberOfRows; j++) {
+		this.tiles = new MyTile[this.numberOfColumns][this.numberOfRows];
+		for (int i = 0; i < this.numberOfRows; i++) {
+			for (int j = 0; j < this.numberOfColumns; j++) {
 				this.tiles[i][j].setTileRowColumn(i, j);
-				this.tiles[i][j].setTileValue(
-						Character.toString(board.charAt(0)));
+				this.tiles[i][j].setTileValue(Character.toString(board.charAt(j)));
 			}
 		}
 	}
 	
-	//counting number of rows by number of splitting string 
-	private int getFromStringNumberOfRows(String board) {
-		//this string splits the board into number of rows
+	//counting the number of Rows and Columns that String holds
+	private void setFromStringNumberOfColumnsAndRows(String board) {
+		this.numberOfColumns = 0;
+		this.numberOfRows = 0;
+		//splitting the board to a String[] array
 		String[] splitter = board.split("\n");
-		int i = 0;
-		for (String string : splitter) {
-			if (!splitter.equals("done"))
-				i++;
-		}
-		return i;
+		//the number of Strings in the String[] array are the number of
+		//rows we have
+		//the number of characters each string holds is the number of Columns
+		this.numberOfColumns = splitter[0].length();
+		this.numberOfRows = splitter.length;
 	}
 	
-	
-
-	private int getFromStringNumberOfColumns(String board) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	/*public BoardGame(MyTile tiles[][], MyTile start, MyTile goal, 
-			MyTile current, int numberOfRows, int numberOfColumns) {
-		
-		this.tiles = tiles;
-		this.source = start;
-		this.goal = goal;
-		this.current = current;
-		this.numberOfRows = numberOfRows;
-		this.numberOfColumns = numberOfColumns;
-		
-	}*/
 	
 	public MyTile getGoal() {
 		return this.goal;
@@ -82,12 +67,13 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	}
 	
 	//setting the Start MyTile and Goal MyTile
-	private void setStartAndGoal(MyTile[][] tiles) {
-		for (int i = 0; i < this.numberOfColumns; i++) {
-			for (int j = 0; j < this.numberOfRows ; j++) {
-				if (tiles[j][i].getTileValue().equals('g'))
+	private void setStartAndGoal() {
+		this.tiles = new MyTile[this.numberOfColumns][this.numberOfRows];
+		for (int i = 0; i < this.numberOfRows; i++) {
+			for (int j = 0; j < this.numberOfColumns ; j++) {
+				if (tiles[j][i].getTileValue().equals("g"))
 					this.goal = tiles[j][i];
-				else if (tiles[j][i].getTileValue().equals('s'))
+				else if (tiles[j][i].getTileValue().equals("s"))
 					this.source = tiles[j][i];
 			}
 		}

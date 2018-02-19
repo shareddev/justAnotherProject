@@ -11,7 +11,7 @@ public abstract class MyTile{
 	
 	//C'Tor
 	public MyTile() {
-		this("");
+		this((String)"");
 	}
 	public MyTile(String value) {
 		this(0, 0,value);
