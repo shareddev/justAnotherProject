@@ -21,8 +21,9 @@ public class MyServer implements IServer {
 	@Override
 	public void start(IClientHandler clientHandler) {
 		this.clientHandler = clientHandler;
-		run();
-
+		try {
+			run();
+		} catch (Exception e) {}
 	}
 	
 	public void stop() {
