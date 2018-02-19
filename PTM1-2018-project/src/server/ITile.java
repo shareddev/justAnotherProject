@@ -1,9 +1,9 @@
 package server;
 
 public interface ITile {
-	public void setTileRowColume(int row, int colume);
+	public void setTileRowColumn(int row, int Column);
 	public int getTileRow();
-	public int getTileColume();
+	public int getTileColumn();
 	public void setTileValue(String value);
 	public String getTileValue();
 	

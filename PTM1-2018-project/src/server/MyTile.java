@@ -1,11 +1,11 @@
 package server;
 
-public class MyTile implements ITile {
+public abstract class MyTile implements ITile {
 	
 	//variables
-	//the Tile's location by a row and colume number
+	//the Tile's location by a row and column number
 	private int row;
-	private int colume;
+	private int column;
 	//The value that the Tile needs to hold
 	private String value;
 	
@@ -14,16 +14,16 @@ public class MyTile implements ITile {
 		this(0, 0,value);
 	}
 	
-	public MyTile(int row, int colume, String value) {
+	public MyTile(int row, int column, String value) {
 		this.row = row;
-		this.colume = colume;
+		this.column = column;
 		this.value = value;
 	}
-	//Setter for the Row and Colume of the Tile
+	//Setter for the Row and column of the Tile
 	@Override
-	public void setTileRowColume(int row, int colume) {
+	public void setTileRowColumn(int row, int column) {
 		this.row = row;
-		this.colume = colume;
+		this.column = column;
 	}
 
 	//Getters
@@ -33,8 +33,8 @@ public class MyTile implements ITile {
 	}
 
 	@Override
-	public int getTileColume() {
-		return this.colume;
+	public int getTileColumn() {
+		return this.column;
 	}
 
 	@Override
@@ -48,12 +48,12 @@ public class MyTile implements ITile {
 	}
 	//according to the protocol provided by the client
 	public String toString() {
-		return (new String("{" + this.getTileRow() + "," + this.getTileColume() + "}"));
+		return (new String("{" + this.getTileRow() + "," + this.getTileColumn() + "}"));
 	}
 	
 	//for comparison between this tile and a provided one
 	public boolean equals(ITile tile) {
-		if (this.getTileColume() == tile.getTileColume() 
+		if (this.getTileColumn() == tile.getTileColumn() 
 				&& this.getTileRow() == tile.getTileRow())
 			return true;
 		else return false;

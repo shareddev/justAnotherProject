@@ -60,9 +60,10 @@ public class MyClientHandler implements IClientHandler {
 		}
 	}
 
-	private String stringToUnique(String inputBuffer) {
+	private String BoardToUnique(String inputBuffer) {
 		
 	}
+	
 	//this method converts the buffer we got from the client
 	//to a string.
 	private String bufferedToString(BufferedReader input) throws IOException{
