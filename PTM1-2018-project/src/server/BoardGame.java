@@ -1,5 +1,5 @@
 package server;
-
+//i might be over complicating this, mayne PipeGameBoard is really just enough
 public abstract class BoardGame<GAME> implements ISearchable<BoardGame<GAME>> {
 	private ITile<GAME> tiles[][];
 	private ITile<GAME> source;
@@ -12,7 +12,7 @@ public abstract class BoardGame<GAME> implements ISearchable<BoardGame<GAME>> {
 
 	//C'Tor
 	public BoardGame() {
-		this(new MyTile<String>(), new MyTile<String>(), new MyTile<String>(), 0, 0);
+		
 	}
 	public BoardGame(ITile<GAME> tiles[][], ITile<GAME> source, ITile<GAME> goal, 
 			ITile<GAME> current, int numberOfRows, int numberOfColumes) {

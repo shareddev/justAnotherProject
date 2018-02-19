@@ -3,21 +3,21 @@ package server;
 import java.io.File;
 import java.util.HashMap;
 
-public class MyCacheManager<GAME> implements ICacheManager {
+public class MyCacheManager implements ICacheManager {
 
 	//Variables
-	HashMap<String,GAME> solutions;
+	HashMap<String,String> solutions;
 	//a string that saves the file path
 	String filePath;
 	//The file class that will handle our file
 	File solutionsFile;
 	//Solution that the MyCacheManager will return to the IClient
-	Solution<GAME> solution;
+	Solution solution;
 	
 	//C'Tor
 	//Because the MyClientHandler sends a file path by default, we don't need to concern with a 
 	//default C'Tor for MyCacheManager
-	public MyCacheManager(String filePath, Solution<GAME> solution) {
+	public MyCacheManager(String filePath, Solution solution) {
 		//the HashMap that will save the solutions to RAM
 		this.solutions = new HashMap<>();
 		//The filePath string that will be used to save our solutions
@@ -29,8 +29,8 @@ public class MyCacheManager<GAME> implements ICacheManager {
 
 }
 	@Override
-	public boolean isExistSolution (String board) {
-		if (this.solutions.containsKey(board))
+	public boolean isExistSolution (String key) {
+		if (this.solutions.containsKey(key))
 			return true;
 		else return false;
 	}
@@ -46,8 +46,10 @@ public class MyCacheManager<GAME> implements ICacheManager {
 		
 	}
 	@Override
-	public String getSolution() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getSolution(String key) {
+		if (isExistSolution(key))
+			return this.solutions.get(key);
+		else return null;
 	}
+
 }

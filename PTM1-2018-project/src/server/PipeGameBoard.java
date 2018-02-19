@@ -1,6 +1,6 @@
 package server;
 
-public class PipeGameBoard<String> extends BoardGame<String> {
+public class PipeGameBoard extends BoardGame<String> {
 	//variables
 
 	public PipeGameBoard() {
@@ -8,7 +8,7 @@ public class PipeGameBoard<String> extends BoardGame<String> {
 	}
 
 	@Override
-	public State<PipeGameBoard> getFirstState() {
+	public State<> getFirstState() {
 		// TODO Auto-generated method stub
 		return null;
 	}

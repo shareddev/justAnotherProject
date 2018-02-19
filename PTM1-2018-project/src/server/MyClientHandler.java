@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 public class MyClientHandler implements IClientHandler {
 	
 	//variables
+	private ISearchable searchable;
 	private ISolver  solver;
 	private ICacheManager cacheManager;
 	private Solution solution;
@@ -24,9 +25,10 @@ public class MyClientHandler implements IClientHandler {
 	
 	//Default C'Tor	- if not provided, we assume that the client wants to solve a PipeBoardGame
 	public MyClientHandler() {
-		this(new MyCacheManager<String>(
+		this(new MyCacheManager(
 				System.getProperty("user.dir") + "\\pipeSolutions\\", 
 					new Solution<String>()));	
+		this.searchable = new PipeGameBoard();
 	}
 	//C'Tor
 	public MyClientHandler(ICacheManager cacheManager) {
@@ -41,13 +43,16 @@ public class MyClientHandler implements IClientHandler {
 		bufferReader = new BufferedReader(new InputStreamReader(input));
 		//other people from class said it's better to use PrintWriter, need to test
 		bufferWriter = new BufferedWriter(new OutputStreamWriter(output));
+		
 		//converting the bufferReader to a string
 		this.inputBuffer = bufferedToString(bufferReader);
+		
+		String uniqueCheck = stringToUnique(this.inputBuffer);
 		
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
-		if (this.cacheManager.isExistSolution()) {
+		if (this.cacheManager.getSolution() == null) {
 			
 		}
 		else {
@@ -55,6 +60,9 @@ public class MyClientHandler implements IClientHandler {
 		}
 	}
 
+	private String stringToUnique(String inputBuffer) {
+		
+	}
 	//this method converts the buffer we got from the client
 	//to a string.
 	private String bufferedToString(BufferedReader input) throws IOException{
