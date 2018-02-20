@@ -10,4 +10,5 @@ public interface ISearchable<T> {
 	public boolean getGoalState(State<T> goalState);
 	public ArrayList<State<PipeBoardGame>> getAllStates(State<PipeBoardGame> next);
 	public String getStringUniqueId(String inputBuffer);
+	public boolean IsGoalState(State<PipeBoardGame> currentState);
 }

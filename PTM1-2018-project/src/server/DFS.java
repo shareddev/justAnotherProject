@@ -11,25 +11,25 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 	private ArrayList<State<T>> explored = new ArrayList<State<T>>();
 
 	@Override
-	public Solution<T> Search(ISearchable<T> pipeGameBoardSearchable) {
-		Solution<T> solution = new Solution<T>();
-		State<T> currentState = new State<T>();
+	public Solution Search(ISearchable<T> pipeGameBoardSearchable) {
+		Solution solution = new Solution();
+		State<PipeBoardGame> currentState = new State();
 		
 		currentState = pipeGameBoardSearchable.getInitialState();
-		stack.push(currentState);
-		explored.add(currentState);
+		stack.push((State<T>) currentState);
+		explored.add((State<T>) currentState);
 		
 		int counter = 1;
 		
 		while(!stack.isEmpty())
 		{
-			currentState = stack.pop();
+			currentState = (State<PipeBoardGame>) stack.pop();
 			
 			counter++;
 			
 			if (pipeGameBoardSearchable.IsGoalState(currentState)) {
 				do {
-					solution.add(currentState.getState());
+					solution.add(currentState.getState().toString());
 					currentState = currentState.getCameFrom();
 				} while (currentState != null);
 
@@ -37,13 +37,13 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 			}
 			
 			
-			neighbors = new ArrayList<State<T>>(pipeGameBoardSearchable.getAllPossibleStates(currentState));
+			neighbors = new ArrayList<State<PipeBoardGame>>(pipeGameBoardSearchable.getAllStates(currentState));
 
 			for(int i=0; i< neighbors.size(); i++)
 			{
 				if (!openClosedContainsNeighbor(neighbors.get(i), explored)) {
-					stack.push(neighbors.get(i));
-					explored.add(neighbors.get(i));
+					stack.push((State<T>) neighbors.get(i));
+					explored.add((State<T>) neighbors.get(i));
 				}
 			}
 			
@@ -53,7 +53,7 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 	}
 
 	
-	private boolean openClosedContainsNeighbor(State<T> checkedState, ArrayList<State<T>> explored) 
+	private boolean openClosedContainsNeighbor(State<T> state, ArrayList<State<T>> explored) 
 	{
 		boolean flag = false;
 
@@ -68,19 +68,13 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 //		}
 
 		for (State<T> s : explored) {
-			if (checkedState.equals(s)) {
+			if (state.equals(s)) {
 				flag = true;
 				return flag;
 			}
 		}
 
 		return flag;
-	}
-	
-	@Override
-	public int getNumberOfNodesEvaluated() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
