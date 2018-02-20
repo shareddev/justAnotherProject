@@ -11,13 +11,14 @@ public class MySolver implements ISolver {
 
 	
 	public MySolver(ISearcher<MyTile[][]> searcher) {
-		this.solver = new SearcherAdapterSolver<MyTile[][]>(searcher);
+		this.searcher = searcher;
 	}
 	
 	@Override
-	public Solution<MyTile[][]> solve(ISearchable<MyTile[][]> searchable) {
-		return this.solver.solve(searchable);
+	public Solution solve(ISearchable<MyTile[][]> searchable) {
+		return this.searcher.search(searchable);
 	}
+
 
 
 }

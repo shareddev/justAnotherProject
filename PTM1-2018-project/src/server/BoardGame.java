@@ -3,7 +3,7 @@ package server;
 import java.util.ArrayList;
 import java.util.Collection;
 
-//i might be over complicating this, mayne PipeGameBoard is really just enough
+//i might be over complicating this, maybe PipeGameBoard is really just enough
 public abstract class BoardGame {
 	//variables
 	protected MyTile tiles[][];

@@ -1,6 +1,6 @@
 package server;
-
-public class MyTile{
+//
+public class MyTile {
 	
 	//variables
 	//the Tile's location by a row and column number
