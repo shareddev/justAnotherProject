@@ -46,7 +46,9 @@ public class MyClientHandler implements IClientHandler {
 		bufferWriter = new PrintWriter(new OutputStreamWriter(output));
 		
 		//converting the bufferReader to a string
-		this.inputBuffer = bufferedToString(bufferReader);
+		try {
+			this.inputBuffer = bufferedToString(bufferReader);
+		} catch (IOException e) {}
 			
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
