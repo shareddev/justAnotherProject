@@ -37,7 +37,7 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 			}
 			
 			
-			neighbors = new ArrayList<State<PipeBoardGame>>(pipeGameBoardSearchable.getAllStates(currentState));
+			neighbors = new ArrayList<State<T>>(Integer.valueOf((pipeGameBoardSearchable.getAllStates(currentState).toString())));
 
 			for(int i=0; i< neighbors.size(); i++)
 			{
@@ -75,6 +75,13 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 		}
 
 		return flag;
+	}
+
+
+	@Override
+	public Solution search(ISearchable<T> searchable) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
