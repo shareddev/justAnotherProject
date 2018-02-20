@@ -7,14 +7,14 @@ import java.util.Collection;
 public abstract class BoardGame implements ISearchable<BoardGame> {
 	//Nathan said that we might want to change the 2-Dim array
 	//what if we have generic besides 2-D?
-	private MyTile tiles[][];
-	private MyTile source;
-	private MyTile goal;
+	protected MyTile tiles[][];
+	protected MyTile source;
+	protected MyTile goal;
 	//an iterator for the future searcher
-	private MyTile current;
+	protected MyTile current;
 	
-	private int numberOfRows;
-	private int numberOfColumns;
+	protected int numberOfRows;
+	protected int numberOfColumns;
 	
 	//C'Tor
 	public BoardGame(String board) {
@@ -25,12 +25,57 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		//setting the values in the tiles
 		setStartAndGoal();
 		//setting the current tile as Source tile for our future ISearcher algorithms
-		setCurrentTile(this.source);
+		this.setCurrent(this.source);
 	}
 	
-	
+	public BoardGame(MyTile[][] Tiles, int numberOfColumns, 
+			int numberOfRows, MyTile source, MyTile goal, MyTile current) {
+		this.setTiles(tiles);
+		this.setNumberOfColumns(numberOfColumns);
+		this.setNumberOfRows(numberOfRows);
+		this.setSource(source);
+		this.setGoal(goal);
+		this.setCurrent(current);
+	}
 
 
+
+	protected MyTile[][] getTiles() {
+		return tiles;
+	}
+	protected void setTiles(MyTile[][] tiles) {
+		this.tiles = tiles;
+	}
+	protected MyTile getSource() {
+		return source;
+	}
+	protected void setSource(MyTile source) {
+		this.source = source;
+	}
+	protected MyTile getGoal() {
+		return goal;
+	}
+	protected void setGoal(MyTile goal) {
+		this.goal = goal;
+	}
+	protected MyTile getCurrent() {
+		return current;
+	}
+	protected void setCurrent(MyTile current) {
+		this.current = current;
+	}
+	protected int getNumberOfRows() {
+		return numberOfRows;
+	}
+	protected void setNumberOfRows(int numberOfRows) {
+		this.numberOfRows = numberOfRows;
+	}
+	protected int getNumberOfColumns() {
+		return numberOfColumns;
+	}
+	protected void setNumberOfColumns(int numberOfColumns) {
+		this.numberOfColumns = numberOfColumns;
+	}
 
 	//going over each character from the board string, using our knowlendge of the 
 	private void setTilesFromString(String board) {
@@ -55,29 +100,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		this.numberOfRows = splitter.length;
 	}
 	
-	//Getters
-	protected MyTile[][] getTiles() {
-		return this.tiles;
-	}
-	protected MyTile getGoal() {
-		return this.goal;
-	}
-	protected MyTile getSource() {
-		return this.source;
-	}
-	protected MyTile getCurrent() {
-		return this.current;
-	}
-	protected int getNumberOfRows() {
-		return this.numberOfRows;
-	}
-	protected int getNumberOfColumns() {
-		return this.numberOfColumns;
-	}
-	//Setters
-	protected void setCurrentTile(MyTile newCurrent) {
-		this.current = newCurrent;
-	}
+	
 	
 	//setting the Start MyTile and Goal MyTile
 	protected void setStartAndGoal() {
@@ -172,7 +195,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 			newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()]
 												[neighboringStates.get(i).getTileColumn()]
 														.rotateTile(j);
-			newState.getState().setCurrentTile(newState.getState().getBoardGame()
+			newState.getState().setCurrent(newState.getState().getBoardGame()
 					[neighboringStates.get(i).getTileRow()][neighboringStates.get(i).getTileColumn()]);
 			if (isCanConnect(newState.getState().getBoardGame()
 					[sourceState.getState().getCurrent().getTileRow()]
@@ -374,7 +397,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 
-	protected BoardGame copyBoard(BoardGame anotherBoard)
+	protected abstract BoardGame copyBoard(BoardGame anotherBoard);
 	/*
 	{
 		String boardString = this.toString();
@@ -435,7 +458,6 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 					[current.getTileColumn() + 1][current.getTileRow()]);
 		return neighboringTiles;
 	}
-	
 	
 	
 	
