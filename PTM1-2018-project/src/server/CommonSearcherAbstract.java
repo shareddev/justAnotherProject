@@ -31,12 +31,4 @@ public abstract class CommonSearcherAbstract<T> implements ISearcher<T> {
 		this.checkedStates += 1;
 		return this.priorityList.poll();
 	}
-
-	public Solution Search(ISearchable<T> pipeGameBoardSearchable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
 }

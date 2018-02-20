@@ -25,7 +25,7 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 		{
 			currentState = (State<PipeBoardGame>) stack.pop();
 			
-			counter++;
+			counter+=1;
 			
 			if (pipeGameBoardSearchable.IsGoalState(currentState)) {
 				do {
@@ -67,10 +67,5 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 	}
 
 
-	@Override
-	public Solution search(ISearchable<T> searchable) {
-		
-		return null;
-	}
 
 }
