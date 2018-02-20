@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class MyCacheManager implements ICacheManager {
 
 	//Variables
-	HashMap<String,File> solutions;
+	HashMap<String,String> solutions;
 	//a string that saves the file path
 	String filePath;
 	//The file class that will handle our file

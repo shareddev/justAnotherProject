@@ -52,16 +52,81 @@ public class MyClientHandler implements IClientHandler {
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
 		if(this.cacheManager.isExistSolution(this.inputBuffer)) {
-			writeSolutionToClient(this.cacheManager.getSolution(this.inputBuffer), bufferWriter);
+			writeSolutionToClient(timeToRotate(this.cacheManager.getSolution(boardToUniqueId(this.inputBuffer))), bufferWriter);
 		}
 		else {
 			this.solution = this.getSolver().solve(searchable);
-			this.cacheManager.addSolution();
+			this.cacheManager.addSolution(boardToUniqueId(this.inputBuffer), solution.toString());
 			writeSolutionToClient();
 		}
 			
 	}
 
+	private String timeToRotate(String solution) {
+		String[] splitter1 = solution.split("\n");
+		String[] splitter2 = this.inputBuffer.split("\n");
+		String rotations = new String("");
+		//collumns
+		for (int i = 0; i < splitter1.length ; i++) {
+			//rows
+			for (int j = 0; j < splitter2[0].length(); j++) {
+				if (splitter1[i].charAt(j) != splitter2[i].charAt(j)) {
+					if(splitter1[i].charAt(j) == '|' || splitter1[i].charAt(j) == '-') {
+						
+					}
+				}
+			}
+		}
+		rotations = rotations.concat("done\n");
+		return rotations;
+	}
+	/*
+	* 1 - Curved Pipes: 'L', 'F', '7', 'J'
+	* 2 - Straight Pipes: '|', '-'
+	* 3 - Source Pipe: 's'
+	* 4 - Goal Pipe: 'g'
+	* 5 - Empty Tile:' '
+	* 6 - End of line: '\n'
+	 */
+	private String boardToUniqueId(String uniqueId) {
+		String buffer = new String("");
+		for (Character character : uniqueId.toCharArray()) {
+			switch (character) {
+			case 'l':
+			case 'L':
+			case 'F':
+			case 'f':
+			case '7':
+			case 'j':
+			case 'J':
+			buffer = buffer.concat("1");
+				break;
+			case '|':
+			case '-':
+			buffer = buffer.concat("2");
+				break;
+			case 's':
+			case 'S':
+			buffer = buffer.concat("3");
+				break;
+			case 'g':
+			case 'G':
+			buffer = buffer.concat("4");
+				break;
+			case ' ':
+			buffer = buffer.concat("5");
+				break;
+			case '\n':
+			buffer = buffer.concat("6");
+				break;
+			default:
+			buffer = buffer.concat("done\n");
+				break;
+			}
+		}
+		
+		return uniqueId;
+	}
 	//Converting the solution from a String to a PrintWriter
 	//making sure that each and every rotation is sent with a tiny delay (not a single message)
 	//so the rotations in the client would happen one after the other
