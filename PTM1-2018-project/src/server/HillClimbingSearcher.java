@@ -3,23 +3,26 @@ package server;
 //Our HillClimbing, need to check more games
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-class HillClimbingSearcher implements ISearcher<String> {
+class HillClimbingSearcher implements ISearcher<MyTile[][]> {
+
+
     private long timeToRun;
-    private StateGrader<String> grader;
+    private StateGrader<MyTile[][]> grader;
 
 
-    HillClimbingSearcher(StateGrader<String> grader, long timeToRun) {
+    HillClimbingSearcher(StateGrader<MyTile[][]> grader, long timeToRun) {
         this.grader = grader;
         this.timeToRun = timeToRun;
     }
 
 
     @Override
-    public Solution search(ISearchable<String> searchable) {
+    public Solution search(ISearchable<MyTile[][]> searchable) {
         //Define the current state as an initial state
-        State<String> next = searchable.getInitialState();
+        State<MyTile[][]> next = searchable.getInitialState();
         Solution result = new Solution();
         
         long time0 = System.currentTimeMillis();
@@ -27,12 +30,12 @@ class HillClimbingSearcher implements ISearcher<String> {
 
         //Loop until the goal state is achieved or no more operators can be applied on the current state:
         while (System.currentTimeMillis() - time0 < timeToRun) {
-            ArrayList<State<String>> neighbors = searchable.getAllStates(next);
+            List<State<MyTile[][]>> neighbors = searchable.getAllStates(next);
 
             if (Math.random() < 0.7) { // with a high probability
                 // find the best one
                 int grade = 0;
-                for (State<String> step : neighbors) {
+                for (State<MyTile[][]> step : neighbors) {
                     int g = grader.grade(step);
                     if (g > grade) {
                         grade = g;
@@ -51,15 +54,5 @@ class HillClimbingSearcher implements ISearcher<String> {
         return result;
 
     }
-
-
-	@Override
-	public int getNumOfEvaluatedNodes() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-
 }
 

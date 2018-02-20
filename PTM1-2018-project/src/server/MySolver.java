@@ -1,24 +1,24 @@
 package server;
 
 
-public class MySolver<T> implements ISolver<T> {
-
-	//variables
-	ISolver<T> solver;
+public class MySolver implements ISolver {
+	
+	//can be bfs, dfs, HillClimbing
+	private ISearcher<MyTile[][]> searcher;
 	//can be PipeGame, 8SomethingGame
 	//has to be for same kind of GAME as the ISolver
-	private ISearchable<T> searchable;
-	//can be bfs, dfs, HillClimbing
-	private ISearcher<T> searcher;
+	private ISearchable<MyTile[][]> searchable;
+
 	
-	public MySolver(ISearcher<T> searcher) {
-		this.solver = new SearcherAdapterSolver<T>(searcher);
+	public MySolver(ISearcher<MyTile[][]> searcher) {
+		this.searcher = searcher;
 	}
 	
 	@Override
-	public Solution<T> solve(ISearchable<T> searchable) {
-		return this.solver.solve(searchable);
+	public Solution solve(ISearchable<MyTile[][]> searchable) {
+		return this.searcher.search(searchable);
 	}
+
 
 
 }
