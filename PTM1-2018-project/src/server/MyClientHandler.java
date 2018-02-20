@@ -27,8 +27,7 @@ public class MyClientHandler implements IClientHandler {
 	
 	//Default C'Tor	- if not provided, we assume that the client wants to solve a PipeBoardGame
 	public MyClientHandler() {
-		this(new MyCacheManager(
-				System.getProperty("user.dir") + "\\pipeSolutions\\"));	
+		this(new MyCacheManager(System.getProperty("user.dir") + "\\pipeSolutions\\"));	
 		this.searchable = new PipeBoardGame(); 
 	}
 	//C'Tor
