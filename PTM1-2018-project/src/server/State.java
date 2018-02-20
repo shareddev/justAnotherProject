@@ -52,7 +52,7 @@ public class State<T> implements Comparable<State<T>>{
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	public State<T> getCameFrom() {
+	public State<T> getPrevious() {
 		return cameFrom;
 	}
 	public void setCameFrom(State<T> cameFrom) {

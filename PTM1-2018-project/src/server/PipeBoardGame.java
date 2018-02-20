@@ -289,19 +289,19 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 	private boolean isExistLoop(State<PipeBoardGame> newState) {
 		State<PipeBoardGame> previousState = new State<PipeBoardGame>();
 		
-		if (newState.getCameFrom() == null) {
+		if (newState.getPrevious() == null) {
 			return false;
 		}
 		else {
-			previousState = newState.getCameFrom();
-			while(previousState.getCameFrom() != null) {
+			previousState = newState.getPrevious();
+			while(previousState.getPrevious() != null) {
 				if(previousState.getState() != null
 						&& newState.getState().getCurrent().equals(previousState.getState().getCurrent())
 						&& newState.getState().getCurrent().toString().equals(previousState.getState().getCurrent().toString())) {
 					newState = previousState;
 					return true;
 				}
-				previousState = previousState.getCameFrom();
+				previousState = previousState.getPrevious();
 			}
 		}
 		return false;
@@ -470,6 +470,14 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 			}
 		}
 		return uniqueId;
+	}
+	@Override
+	public boolean IsGoalState(State<PipeBoardGame> currentState) {
+		return currentState.getState().isSolved();
+	}
+	private boolean isSolved() {
+		
+		return false;
 	}
 
 	

@@ -4,66 +4,62 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 
-public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
+public class DFS<T> extends CommonSearcherAbstract<T> {
 
+	//visited - colored black
+	private ArrayList<State<T>> black = new ArrayList<State<T>>();
 	private Stack<State<T>> stack = new Stack<State<T>>();
-	private ArrayList<State<T>> neighbors = new ArrayList<State<T>>();
-	private ArrayList<State<T>> explored = new ArrayList<State<T>>();
+	//left to check
+	private ArrayList<State<T>> possibleNeighbors = 
+			new ArrayList<State<T>>();
 
 	@Override
-	public Solution Search(ISearchable<T> pipeGameBoardSearchable) {
+	public Solution search(ISearchable<T> searchable) {
+		int counter = 0;
 		Solution solution = new Solution();
 		State<PipeBoardGame> currentState = new State();
-		
-		currentState = pipeGameBoardSearchable.getInitialState();
+		currentState = searchable.getInitialState();
 		stack.push((State<T>) currentState);
-		explored.add((State<T>) currentState);
+		black.add((State<T>) currentState);
 		
-		int counter = 1;
+		//counter = 0;
+		counter = 1;
 		
 		while(!stack.isEmpty())
 		{
-			currentState = (State<PipeBoardGame>) stack.pop();
+			currentState =  (State<PipeBoardGame>) stack.pop();
 			
 			counter+=1;
-			
-			if (pipeGameBoardSearchable.IsGoalState(currentState)) {
+	
+			if (searchable.IsGoalState(currentState)) {
 				do {
 					solution.add(currentState.getState().toString());
-					currentState = currentState.getCameFrom();
+					currentState = currentState.getPrevious();
 				} while (currentState != null);
 
 				return solution;
 			}
-			
-			
-			neighbors = new ArrayList<State<T>>(Integer.valueOf((pipeGameBoardSearchable.getAllStates(currentState).toString())));
-
-			for(int i=0; i< neighbors.size(); i++)
+			possibleNeighbors = new ArrayList<State<T>>(Integer.valueOf(
+					(searchable.getAllStates(currentState).toString())));
+			for(int i=0; i< possibleNeighbors.size(); i++)
 			{
-				if (!openClosedContainsNeighbor(neighbors.get(i), explored)) {
-					stack.push((State<T>) neighbors.get(i));
-					explored.add((State<T>) neighbors.get(i));
+				if (!isContainsNeighbor(possibleNeighbors.get(i), black)) {
+					stack.push((State<T>) possibleNeighbors.get(i));
+					black.add((State<T>) possibleNeighbors.get(i));
 				}
 			}
 			
 		}
-		
 		return solution;
 	}
-
 	
-	private boolean openClosedContainsNeighbor(State<T> state, ArrayList<State<T>> explored) 
+	private boolean isContainsNeighbor(State<T> state, 
+			ArrayList<State<T>> explored) 
 	{
-		boolean flag = false;
-		for (State<T> s : explored) {
-			if (state.equals(s)) {
-				flag = true;
-				return flag;
-			}
-		}
-
-		return flag;
+		for (State<T> s : explored) 
+			if (state.equals(s)) 
+				return true;
+		return false;
 	}
 
 
