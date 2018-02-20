@@ -376,8 +376,11 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 
-	private BoardGame copyBoard(BoardGame board) {
-		return
+	private BoardGame copyBoard(BoardGame anotherBoard) {
+		
+		
+		
+		return boardCopy;
 	}
 
 
@@ -393,7 +396,23 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		ArrayList<MyTile> neighboringTiles = new ArrayList<MyTile>();
 		
 		
-		return null;
+			//upper Tile
+			if (current.getTileRow() != 0)
+			neighboringTiles.add(this.getTiles()
+					[current.getTileColumn()][current.getTileRow() - 1]);
+			//lower Tile
+			if (current.getTileRow() != this.getNumberOfRows())
+			neighboringTiles.add(this.getTiles()
+					[current.getTileColumn()][current.getTileRow() + 1]);
+			//left Tile
+			if (current.getTileColumn() != 0)
+			neighboringTiles.add(this.getTiles()
+					[current.getTileColumn() - 1][current.getTileRow()]);
+			//right Tile
+			if (current.getTileColumn() != this.getNumberOfColumns())
+			neighboringTiles.add(this.getTiles()
+					[current.getTileColumn() + 1][current.getTileRow()]);
+		return neighboringTiles;
 	}
 	
 	
