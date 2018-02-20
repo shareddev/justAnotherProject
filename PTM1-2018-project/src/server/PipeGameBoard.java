@@ -18,6 +18,11 @@ public class PipeGameBoard extends BoardGame {
 
 	}
 
+	public PipeGameBoard() {
+		this("s|g\n");
+	}
+
+
 	@Override
 	protected boolean isCanConnect(MyTile current, MyTile next) {
 		String currentValue = new String(current.getTileValue());
@@ -169,17 +174,35 @@ public class PipeGameBoard extends BoardGame {
 
 	@Override
 	protected MyTile findSource(MyTile[][] boardGame) {
-		for(int i = 0 ; i < boardGame. ; i++)
-			for(int j=0;j<colSize;j++)
-				if(pipeGameBoard[i][j].getValue().equals('s'))
-					return pipeGameBoard[i][j];
+		for(int i = 0 ; i < this.getNumberOfRows() ; i++)
+			for(int j=0;j< this.getNumberOfColumns() ;j++)
+				if(boardGame[j][i].getTileValue().equals('s'))
+					return boardGame[i][j];
 		return null;
 	}
 
 
 	@Override
 	protected MyTile findGoal(MyTile[][] boardGame) {
-		
+		for(int i = 0 ; i < this.getNumberOfRows() ; i++)
+			for(int j=0;j< this.getNumberOfColumns() ;j++)
+				if(boardGame[j][i].getTileValue().equals('g'))
+					return boardGame[i][j];
+		return null;
+	}
+
+
+	@Override
+	public State<BoardGame> getInitialState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean isGoalState(State<BoardGame> goalState) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

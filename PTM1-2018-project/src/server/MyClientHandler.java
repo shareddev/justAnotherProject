@@ -59,14 +59,19 @@ public class MyClientHandler implements IClientHandler {
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
 		if(this.cacheManager.isExistSolution(uniqueCheck)) {
-			writeSolutionToClient(this.solver.getRequiredChanges(this.cacheManager.getSolution(uniqueCheck)), bufferWriter);
+			writeSolutionToClient(this.getRequiredChanges(this.cacheManager.getSolution(uniqueCheck)), bufferWriter);
 		}
 		else {
 			
 		}
 			
 	}
-
+	//converts the changes that we need to make
+	private String getRequiredChanges(String solution2) {
+		String changes = new String("");
+		
+	}
+	
 	//Converting the solution from a String to a PrintWriter
 	//making sure that each and every rotation is sent with a tiny delay (not a single message)
 	//so the rotations in the client would happen one after the other

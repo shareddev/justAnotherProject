@@ -17,7 +17,7 @@ class HillClimbingSearcher implements ISearcher<String> {
     @Override
     public Solution search(ISearchable<String> searchable) {
         //Define the current state as an initial state
-        State<String> next = searchable.getOriginalState();
+        State<String> next = searchable.getInitialState();
         Solution result = new Solution();
         
         long time0 = System.currentTimeMillis();
