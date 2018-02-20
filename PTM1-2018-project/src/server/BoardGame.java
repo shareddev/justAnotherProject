@@ -113,19 +113,15 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		else return this.equals((BoardGame) object);
 	}
 	
-	//going over each tile from tiles, copying the Column, Row, Value and finishes the 
-	//row with an "\n"
-	//at the end of the we add "done\n" to indicate that we got the entire board
+	//converts the Tiles[][] back to a string the represents a BoardGame
 	@Override
 	public String toString() {
 		String string = new String("");
 		for (int i = 0; i < this.getNumberOfRows(); i++) {
 			for (int j = 0; j < this.getNumberOfColumns(); j++) {
-				string = string.concat(
-						this.getTiles()[i][j].toString()).concat(
-								this.getTiles()[i][j].getTileValue()).concat("\n");
+			string = string.concat(this.getTiles()[j][i].getTileValue());
 			}
-			string = string.concat("done\n");
+			string = string.concat("\n");
 		}
 		return string;
 	}
@@ -377,9 +373,11 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 	private BoardGame copyBoard(BoardGame anotherBoard) {
+		String boardString = this.toString();
+		BoardGame boardCopy;
 		
-		
-		
+		MyTile[][] copyTile = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
+		MyTile 
 		return boardCopy;
 	}
 

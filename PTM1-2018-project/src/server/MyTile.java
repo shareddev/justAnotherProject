@@ -52,8 +52,8 @@ public class MyTile{
 	}
 	//according to the protocol provided by the client
 	public String toString() {
-		//return (new String("{" + this.getTileColumn() + "," + this.getTileRow() + "}"));
-		return (new String(this.getTileColumn() + "," + this.getTileRow()));
+		return (new String("{" + this.getTileColumn() + "," + this.getTileRow() + "}"));
+		//return (new String(this.getTileColumn() + "," + this.getTileRow()));
 	}
 	
 	//for comparison between this tile and a provided one
