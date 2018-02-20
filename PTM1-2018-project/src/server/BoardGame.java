@@ -149,8 +149,10 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		return string;
 	}
 	
+	//an abstract method for each Game to decide if the current State is the desired State
 	@Override
-	public boolean isGoalState(State<BoardGame> goalState) {
+	public abstract boolean getGoalState(State<BoardGame> goalState);
+	/*{
 		ArrayList<MyTile> neighbors = new ArrayList<MyTile>(this.getNeighboringTiles(this.getSource()));
 		for (int i = 0; i < neighbors.size() ; i++) {
 			if(isExistSourceToGoalPath())
@@ -158,13 +160,17 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		}
 		return false;
 	}
+	*/
 	
+	//an abstract method for each Game to 
 	@Override
-	public State<BoardGame> getInitialState() {
+	public abstract State<BoardGame> getInitialState();
+	/*
+	   {
 		return this
 		return null;
 	}
-	
+	*/
 	//getting all possible states that our board can produce
 	@Override
 	public Collection<State<BoardGame>> getAllStates(

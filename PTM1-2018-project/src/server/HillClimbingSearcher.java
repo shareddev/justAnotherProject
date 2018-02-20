@@ -1,5 +1,7 @@
 package server;
 
+//Our HillClimbing, need to check more games
+
 import java.util.ArrayList;
 import java.util.Random;
 
