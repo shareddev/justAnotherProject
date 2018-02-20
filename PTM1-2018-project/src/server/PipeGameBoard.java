@@ -191,6 +191,19 @@ public class PipeGameBoard extends BoardGame {
 	}
 
 
+	@Override
+	public boolean getGoalState(State<BoardGame> goalState) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public State<BoardGame> getInitialState() {
+		return (new State<BoardGane>(this));
+	}
+
+
 
 
 

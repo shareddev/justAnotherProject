@@ -52,9 +52,7 @@ public class State<T> implements Comparable<State<T>>, Serializable {
 	public String toString() {
 		return this.state.toString();
 	}
-	//isn't this suppose to be an override?
-	//isn't equals part of object class?
-	//need to ask Nathan if he knows
+
 	//@Override
 	public boolean equals(State<T> compare) {
 		if(this.getState().equals(compare.getState()))
