@@ -164,7 +164,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	
 	//an abstract method for each Game to 
 	@Override
-	public abstract State<? extends BoardGame> getInitialState();
+	public abstract State<BoardGame> getInitialState();
 	/*
 	   {
 		return this
