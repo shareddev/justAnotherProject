@@ -192,114 +192,114 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 	private boolean isCanConnect(MyTile current, MyTile next) {
-		String currentValue = new String(current.getTileValue());
+		String currentValue = new String(current.getTileValue().tos);
 		String nextValue = new String(next.getTileValue());
 		
-		if(currentValue.equals("s") || currentValue.equals("g")
+		if(currentValue.equals("s") || currentValue.equals("g"))
 		{
-			// checking right
-			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			//Checking right
+			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(next.getTileValue().equals("-") || next.getTileValue()=='7' ||next.getTileValue()=='J')
+				if(nextValue.equals("-") || nextValue.equals("7") || nextValue.equals("J"))
 					return true;
 			}	
-			// checking left?
-			else if(next.getTileColumn()<currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			//Checking left
+			else if(next.getTileColumn()<current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(next.getTileValue().equals("-") || next.getTileValue()=='L' ||next.getTileValue()=='F')
+				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F"))
 					return true;
 			}
 			
-			// checking down?
-			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()>currentValue.getRow())
+			//Checking down
+			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()>current.getTileRow())
 			{
-				if(next.getTileValue()'|' || next.getTileValue()=='L' ||next.getTileValue()=='J')
+				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J"))
 					return true;
 			}
 			
-			// checking up?
-			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()<currentValue.getRow())
+			//Checking up
+			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
 			{
-				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F')
+				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F"))
 					return true;
 			}
 		}
-		else if(currentValue.getTileValue()=='|')
+		else if(currentValue.equals("|"))
 		{
-			// checking down?
-			if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()>currentValue.getRow())
+			//Checking down
+			if(next.getTileColumn() == current.getTileColumn() && next.getTileRow()>current.getTileRow())
 			{
-				if(next.getTileValue()=='|' || next.getTileValue()=='L' || next.getTileValue()=='J'|| next.getTileValue()=='g')
+				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J") || nextValue.equals("g"))
 					return true;
 			}
 			
-			// checking up?
-			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()<currentValue.getRow())
+			//Checking up
+			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
 			{
-				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
+				if(nextValue|' || nextValue7' ||nextValueF'|| nextValueg')
 					return true;
 			}
 		}
 		
-		else if(currentValue.getTileValue()=='-')
+		else if(currentValue'-')
 		{
-			// neigbor from right?
-			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			//Checking right
+			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(next.getTileValue()=='-' || next.getTileValue()=='7' ||next.getTileValue()=='J'|| next.getTileValue()=='s')
+				if(nextValue-' || nextValue7' ||nextValueJ'|| nextValues')
 					return true;
 			}	
-			// checking left?
-			else if(next.getTileColumn()<currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			//Checking left
+			else if(next.getTileColumn()<current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(next.getTileValue()=='-' || next.getTileValue()=='L' ||next.getTileValue()=='F'|| next.getTileValue()=='s')
+				if(nextValue-' || nextValueL' ||nextValueF'|| nextValues')
 					return true;
 			}
 		}
-		else if(currentValue.getTileValue()=='F')
+		else if(currentValue'F')
 		{
-			// neigbor from right?
-			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			//Checking right
+			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(next.getTileValue()=='-' || next.getTileValue()=='7' ||next.getTileValue()=='J'|| next.getTileValue()=='g')
+				if(nextValue-' || nextValue7' ||nextValueJ'|| nextValueg')
 					return true;
 			}
 			
-			// neigbor from down?
-			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()>currentValue.getRow())
+			//Checking down
+			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()>current.getTileRow())
 			{
-				if(next.getTileValue()=='|' || next.getTileValue()=='L' ||next.getTileValue()=='J'|| next.getTileValue()=='g')
+				if(nextValue|' || nextValueL' ||nextValueJ'|| nextValueg')
 					return true;
 			}
 		}
 		
-		else if(currentValue.getTileValue()=='L')
+		else if(currentValue'L')
 		{
-			// neigbor from right?
-			if(next.getTileColumn()>currentValue.getTileColumn() && next.getRow()==currentValue.getRow())
+			//Checking right
+			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(next.getTileValue()=='-' || next.getTileValue()=='7' ||next.getTileValue()=='J'|| next.getTileValue()=='g')
+				if(nextValue-' || nextValue7' ||nextValueJ'|| nextValueg')
 					return true;
 			}
 			
-			// neigbor from up?
-			else if(next.getTileColumn()==currentValue.getTileColumn() && next.getRow()<currentValue.getRow())
+			//Checking up
+			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
 			{
-				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
+				if(nextValue|' || nextValue7' ||nextValueF'|| nextValueg')
 					return true;
 			}
 		}
 		
-		else if(currentValue.getTileValue()=='7')
+		else if(currentValue'7')
 		{
-			// neigbor from left?
-			if(neighbor.getTileColumn()<currentTile.getTileColumn() && neighbor.getRow()==currentTile.getRow())
+			//Checking left
+			if(neighbor.getCol()<currentTile.getCol() && neighbor.getRow()==currentTile.getRow())
 			{
 				if(neighbor.getValue()=='-' || neighbor.getValue()=='L' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
 					return true;
 			}
-			// neigbor from down?
-			else if(neighbor.getTileColumn()==currentTile.getTileColumn() && neighbor.getRow()>currentTile.getRow())
+			//Checking down
+			else if(neighbor.getCol()==currentTile.getCol() && neighbor.getRow()>currentTile.getRow())
 			{
 				if(neighbor.getValue()=='|' || neighbor.getValue()=='L' || neighbor.getValue()=='J'|| neighbor.getValue()=='g')
 					return true;
@@ -308,14 +308,14 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		
 		else if(currentTile.getValue()=='J')
 		{
-			// neigbor from left?
-			if(neighbor.getTileColumn()<currentTile.getTileColumn() && neighbor.getRow()==currentTile.getRow())
+			//Checking left
+			if(neighbor.getCol()<currentTile.getCol() && neighbor.getRow()==currentTile.getRow())
 			{
 				if(neighbor.getValue()=='-' || neighbor.getValue()=='L' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
 					return true;
 			}
-			//neigbor from up?
-			else if(neighbor.getTileColumn()==currentTile.getTileColumn() && neighbor.getRow()<currentTile.getRow())
+			//Checking up
+			else if(neighbor.getCol()==currentTile.getCol() && neighbor.getRow()<currentTile.getRow())
 			{
 				if(neighbor.getValue()=='|' || neighbor.getValue()=='7' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
 					return true;
@@ -324,6 +324,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		}
 		return false;
 	}
+
 
 
 
