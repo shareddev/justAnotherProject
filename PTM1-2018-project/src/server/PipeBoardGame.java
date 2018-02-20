@@ -267,134 +267,15 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 		String currentValue = new String(current.getTileValue());
 		String nextValue = new String(next.getTileValue());
 		
-		if(currentValue.equals("s") || currentValue.equals("g"))
-		{
-			//Checking right
-			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("7") || nextValue.equals("J"))
-					return true;
-			}	
-			//Checking left
-			else if(next.getTileColumn()<current.getTileColumn() && next.getTileRow()==current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F"))
-					return true;
-			}
-			
-			//Checking down
-			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()>current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J"))
-					return true;
-			}
-			
-			//Checking up
-			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F"))
-					return true;
-			}
-		}
-		else if(currentValue.equals("|"))
-		{
-			//Checking down
-			if(next.getTileColumn() == current.getTileColumn() && next.getTileRow()>current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J") || nextValue.equals("g"))
-					return true;
-			}
-			
-			//Checking up
-			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F")|| nextValue.equals("g"))
-					return true;
-			}
-		}
+		//making sure they are close enough to actually be able to connect
+		if (Math.abs(current.getTileRow() - next.getTileRow()) + 
+				Math.abs(current.getTileColumn() - next.getTileColumn()) > 1)
+			return false;
 		
-		else if(currentValue.equals("-"))
-		{
-			//Checking right
-			if(next.getTileColumn() > current.getTileColumn() && next.getTileRow() == current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("7") ||nextValue.equals("J") || nextValue.equals("s"))
-					return true;
-			}	
-			//Checking left
-			else if(next.getTileColumn() < current.getTileColumn() && next.getTileRow() == current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F")|| nextValue.equals("s"))
-					return true;
-			}
-		}
-		else if(currentValue.equals("F"))
-		{
-			//Checking right
-			if(next.getTileColumn() > current.getTileColumn() && next.getTileRow() == current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("7") || nextValue.equals("J") || nextValue.equals("g"))
-					return true;
-			}
-			
-			//Checking down
-			else if(next.getTileColumn() == current.getTileColumn() && next.getTileRow() > current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J") || nextValue.equals("g"))
-					return true;
-			}
-		}
-		
-		else if(currentValue.equals("L"))
-		{
-			//Checking right
-			if(next.getTileColumn() > current.getTileColumn() && next.getTileRow() == current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("7") || nextValue.equals("J") || nextValue.equals("g"))
-					return true;
-			}
-			
-			//Checking up
-			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F") || nextValue.equals("g"))
-					return true;
-			}
-		}
-		
-		else if(currentValue.equals("7"))
-		{
-			//Checking left
-			if(next.getTileColumn() < current.getTileColumn() && next.getTileRow() == current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F") || nextValue.equals("g"))
-					return true;
-			}
-			//Checking down
-			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()>current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J") || nextValue.equals("g"))
-					return true;
-			}
-		}
-		
-		else if(currentValue.equals("J"))
-		{
-			//Checking left
-			if(next.getTileColumn()<current.getTileColumn() && next.getTileRow()==current.getTileRow())
-			{
-				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F")|| nextValue.equals("g"))
-					return true;
-			}
-			//Checking up
-			else if(next.getTileColumn() == current.getTileColumn() && next.getTileRow() < current.getTileRow())
-			{
-				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F") || nextValue.equals("g"))
-					return true;
-			}
-			
-		}
-		return false;
+		if (current.getTileValue().equals(" ") || ((current.getTileValue().equals("s") || current.getTileValue().equals("g"))
+				&& (next.getTileValue().equals("s") || next.getTileValue().equals("g") || next.getTileValue().equals(" " ))))
+			return false;
+		else return true;
 	}
 
 
