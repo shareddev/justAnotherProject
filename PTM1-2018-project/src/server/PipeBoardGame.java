@@ -1,40 +1,43 @@
 package server;
+
 //
 import java.util.ArrayList;
 import java.util.Collection;
 
 //i might be over complicating this, maybe PipeBoardGame is really just enough
 public class PipeBoardGame implements ISearchable<PipeBoardGame> {
-	//variables
-	//MyTile is searchable
+	// variables
+	// MyTile is searchable
 	protected MyTile tiles[][];
 	protected MyTile source;
 	protected MyTile goal;
-	//an iterator for the future searcher
+	// an iterator for the future searcher
 	protected MyTile current;
-	
+
 	protected int numberOfRows;
 	protected int numberOfColumns;
-	
-	//C'Tor
+
+	// C'Tor
 	public PipeBoardGame(String board) {
-		//counting the numberOfRows and numberOfColumns
+		// counting the numberOfRows and numberOfColumns
 		setFromStringNumberOfColumnsAndRows(board);
-		//converting the String the represents a board to a 2D MyTiles array
+		// converting the String the represents a board to a 2D MyTiles array
 		setTilesFromString(board);
-		//setting the values in the tiles
+		// setting the values in the tiles
 		setStartAndGoal();
-		//setting the current tile as Source tile for our future ISearcher algorithms
+		// setting the current tile as Source tile for our future ISearcher algorithms
 		this.setCurrent(this.source);
 	}
-	//Default C'Tor - creating the basic problem
+
+	// Default C'Tor - creating the basic problem
 	public PipeBoardGame() {
 		this("s|g\ndone\n");
 	}
-	//Copy C'tor created for the searching Algorithms, they create
-	//a copy of a PipeBoardGame to save as a path.
-	public PipeBoardGame(MyTile[][] Tiles, int numberOfColumns, 
-			int numberOfRows, MyTile source, MyTile goal, MyTile current) {
+
+	// Copy C'tor created for the searching Algorithms, they create
+	// a copy of a PipeBoardGame to save as a path.
+	public PipeBoardGame(MyTile[][] Tiles, int numberOfColumns, int numberOfRows, MyTile source, MyTile goal,
+			MyTile current) {
 		this.setTiles(tiles);
 		this.setNumberOfColumns(numberOfColumns);
 		this.setNumberOfRows(numberOfRows);
@@ -43,46 +46,55 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 		this.setCurrent(current);
 	}
 
-
-
 	protected MyTile[][] getTiles() {
 		return tiles;
 	}
+
 	protected void setTiles(MyTile[][] tiles) {
 		this.tiles = tiles;
 	}
+
 	protected MyTile getSource() {
 		return source;
 	}
+
 	protected void setSource(MyTile source) {
 		this.source = source;
 	}
+
 	protected MyTile getGoal() {
 		return goal;
 	}
+
 	protected void setGoal(MyTile goal) {
 		this.goal = goal;
 	}
+
 	protected MyTile getCurrent() {
 		return current;
 	}
+
 	protected void setCurrent(MyTile current) {
 		this.current = current;
 	}
+
 	protected int getNumberOfRows() {
 		return numberOfRows;
 	}
+
 	protected void setNumberOfRows(int numberOfRows) {
 		this.numberOfRows = numberOfRows;
 	}
+
 	protected int getNumberOfColumns() {
 		return numberOfColumns;
 	}
+
 	protected void setNumberOfColumns(int numberOfColumns) {
 		this.numberOfColumns = numberOfColumns;
 	}
 
-	//going over each character from the board string, using our knowlendge of the 
+	// going over each character from the board string, using our knowlendge of the
 	private void setTilesFromString(String board) {
 		this.tiles = new MyTile[this.numberOfColumns][this.numberOfRows];
 		for (int i = 0; i < this.numberOfRows; i++) {
@@ -92,212 +104,197 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 			}
 		}
 	}
-	
-	//counting the number of Rows and Columns that String holds
+
+	// counting the number of Rows and Columns that String holds
 	private void setFromStringNumberOfColumnsAndRows(String board) {
-		/*splitting the board to a String[] array
-		 *the number of Strings in the String[] array are the number of
-		 *rows we have
-		 *the number of characters each string holds is the number of Columns
-		*/
+		/*
+		 * splitting the board to a String[] array the number of Strings in the String[]
+		 * array are the number of rows we have the number of characters each string
+		 * holds is the number of Columns
+		 */
 		String[] splitter = board.split("\n");
 		this.numberOfColumns = splitter[0].length();
 		this.numberOfRows = splitter.length;
 	}
-	
-	
-	
-	//setting the Start MyTile and Goal MyTile
+
+	// setting the Start MyTile and Goal MyTile
 	protected void setStartAndGoal() {
 		this.tiles = new MyTile[this.numberOfColumns][this.numberOfRows];
 		for (int i = 0; i < this.numberOfRows; i++) {
-			for (int j = 0; j < this.numberOfColumns ; j++) {
+			for (int j = 0; j < this.numberOfColumns; j++) {
 				if (tiles[j][i].getTileValue().equals("g"))
 					this.goal = new MyTile(tiles[j][i]);
 				else if (tiles[j][i].getTileValue().equals("s"))
-					this.source  = new MyTile(tiles[j][i]);
+					this.source = new MyTile(tiles[j][i]);
 			}
-			//if we found both Source and Goal, we stop the loop
-			if (this.goal.getTileValue().equals("g")
-					&& this.source.getTileValue().equals("s"))
+			// if we found both Source and Goal, we stop the loop
+			if (this.goal.getTileValue().equals("g") && this.source.getTileValue().equals("s"))
 				break;
 		}
 	}
-	//Override
+
+	// Override
 	public boolean equals(PipeBoardGame boardGame) {
-		if(this.getCurrent().equals(boardGame.getCurrent())
-				&& this.getCurrent().getTileValue()
-					.equals(boardGame.getCurrent().getTileValue()))
+		if (this.getCurrent().equals(boardGame.getCurrent())
+				&& this.getCurrent().getTileValue().equals(boardGame.getCurrent().getTileValue()))
 			return true;
-		else return false;
+		else
+			return false;
 	}
-	
+
 	@Override
 	public boolean equals(Object object) {
 		if (!(object instanceof PipeBoardGame))
-				return false;
+			return false;
 		if (object == this)
 			return true;
-		else return this.equals((PipeBoardGame) object);
+		else
+			return this.equals((PipeBoardGame) object);
 	}
-	
-	//converts the Tiles[][] back to a string the represents a BoardGame
+
+	// converts the Tiles[][] back to a string the represents a BoardGame
 	@Override
 	public String toString() {
 		String string = new String("");
 		for (int i = 0; i < this.getNumberOfRows(); i++) {
 			for (int j = 0; j < this.getNumberOfColumns(); j++) {
-			string = string.concat(this.getTiles()[j][i].getTileValue());
+				string = string.concat(this.getTiles()[j][i].getTileValue());
 			}
 			string = string.concat("\n");
 		}
 		return string;
 	}
-	
-	//an abstract method for each Game to decide if the current State is the desired State
+
+	// an abstract method for each Game to decide if the current State is the
+	// desired State
 	@Override
-	public boolean getGoalState(State<PipeBoardGame> goalState)
-	{
+	public boolean getGoalState(State<PipeBoardGame> goalState) {
 		ArrayList<MyTile> neighbors = new ArrayList<MyTile>(this.getNeighboringTiles(this.getSource()));
-		for (int i = 0; i < neighbors.size() ; i++) {
-			if(isExistSourceToGoalPath())
+		for (int i = 0; i < neighbors.size(); i++) {
+			if (isExistSourceToGoalPath())
 				return true;
 		}
 		return false;
 	}
-	
-	
+
 	private boolean isExistSourceToGoalPath() {
-		ArrayList<MyTile> neighbors = new ArrayList<MyTile>
-		(this.getNeighboringTiles(this.getSource()));
-		
-		for (int i = 0; i < neighbors.size() ; i++) {
-			if(this.isPath(neighbors.get(i), this.getSource()))
+		ArrayList<MyTile> neighbors = new ArrayList<MyTile>(this.getNeighboringTiles(this.getSource()));
+
+		for (int i = 0; i < neighbors.size(); i++) {
+			if (this.isPath(neighbors.get(i), this.getSource()))
 				return true;
 		}
 		return false;
 	}
 
 	protected boolean isPath(MyTile current, MyTile previous) {
-		if(this.isCanConnect(previous, current)) {
-			ArrayList<MyTile> neighbors = new ArrayList<MyTile>
-			(this.getNeighboringTiles(current));
-			
-			for (int i = 0; i < neighbors.size() ; i++) {
-				if(neighbors.get(i).equals(previous))
+		if (this.isCanConnect(previous, current)) {
+			ArrayList<MyTile> neighbors = new ArrayList<MyTile>(this.getNeighboringTiles(current));
+
+			for (int i = 0; i < neighbors.size(); i++) {
+				if (neighbors.get(i).equals(previous))
 					neighbors.remove(i);
 			}
-			
-			for (int i = 0; i < neighbors.size() ; i++) {
-				if(this.isCanConnect(neighbors.get(i), current)
+
+			for (int i = 0; i < neighbors.size(); i++) {
+				if (this.isCanConnect(neighbors.get(i), current)
 						&& neighbors.get(i).getTileValue().equals(this.getGoal().getTileValue())) {
 					return true;
-				}
-				else return isPath(neighbors.get(i), current);
+				} else
+					return isPath(neighbors.get(i), current);
 			}
 		}
 		return false;
 	}
 
-	//an abstract method for each Game to 
+	// an abstract method for each Game to
 	@Override
 	public State<PipeBoardGame> getInitialState() {
 		return (new State<PipeBoardGame>(this));
 	}
-	
-	
-	
-	//getting all possible states that our board can produce
+
+	// getting all possible states that our board can produce
 	@Override
-	public ArrayList<State<PipeBoardGame>> getAllStates(
-			State<PipeBoardGame> sourceState){
-		
-		//setting an ArrayList to hold all the possible states we will create
-		ArrayList<State<PipeBoardGame>> possibleStatesList = 
-				new ArrayList<State<PipeBoardGame>>();
-		
-		//creating a list of possible changes of the "Neighboring" States
+	public ArrayList<State<PipeBoardGame>> getAllStates(State<PipeBoardGame> sourceState) {
+
+		// setting an ArrayList to hold all the possible states we will create
+		ArrayList<State<PipeBoardGame>> possibleStatesList = new ArrayList<State<PipeBoardGame>>();
+
+		// creating a list of possible changes of the "Neighboring" States
 		ArrayList<MyTile> neighboringStates = new ArrayList<MyTile>(
-				sourceState.getState().getNeighboringTiles(
-						sourceState.getState().getCurrent()));
-		
-		//creating a temporary State for each iteration of a State
+				sourceState.getState().getNeighboringTiles(sourceState.getState().getCurrent()));
+
+		// creating a temporary State for each iteration of a State
 		State<PipeBoardGame> newState = new State<PipeBoardGame>();
-		
-		for (int i = 0; i < neighboringStates.size() ; i++) {
+
+		for (int i = 0; i < neighboringStates.size(); i++) {
 			String compare = new String("");
 			compare = neighboringStates.get(i).getTileValue();
-			
-			if(!compare.equals(" ") && !compare.equals("s") 
-					&& !compare.equals("g")) {
-				if(compare.equals("-") || compare.equals("|"))
-					rotateNeighbotingTile(possibleStatesList, newState, sourceState,
-							neighboringStates,2,i);
-				else rotateNeighbotingTile(possibleStatesList, newState, sourceState,
-						neighboringStates,4,i);
+
+			if (!compare.equals(" ") && !compare.equals("s") && !compare.equals("g")) {
+				if (compare.equals("-") || compare.equals("|"))
+					rotateNeighbotingTile(possibleStatesList, newState, sourceState, neighboringStates, 2, i);
+				else
+					rotateNeighbotingTile(possibleStatesList, newState, sourceState, neighboringStates, 4, i);
 			}
 		}
 		return possibleStatesList;
 	}
 
+	// Rotating according to the PipeGame, need to just after testing
+	private void rotateNeighbotingTile(ArrayList<State<PipeBoardGame>> possibleStatesList,
+			State<PipeBoardGame> newState, State<PipeBoardGame> sourceState, ArrayList<MyTile> neighboringStates,
+			int timesToRotate, int i) {
+		// resetting the given newState to add to the possibleStatesList
+		for (int j = 1; j < timesToRotate; j++) {
+			newState = new State<PipeBoardGame>(copyBoard(sourceState.getState()), calCost(newState.getState()),
+					sourceState);
 
-	//Rotating according to the PipeGame, need to just after testing
-	private void rotateNeighbotingTile(ArrayList<State<PipeBoardGame>> possibleStatesList, 
-			State<PipeBoardGame> newState,State<PipeBoardGame> sourceState, 
-				ArrayList<MyTile> neighboringStates, int timesToRotate, int i) {
-		//resetting the given newState to add to the possibleStatesList
-		for (int j = 1 ; j < timesToRotate ; j++) {
-			newState = new State<PipeBoardGame>(copyBoard(sourceState.getState()), 
-					calCost(newState.getState()), sourceState);
-			
-			newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()]
-												[neighboringStates.get(i).getTileColumn()]
-														.rotateTile(j);
-			newState.getState().setCurrent(newState.getState().getBoardGame()
-					[neighboringStates.get(i).getTileRow()][neighboringStates.get(i).getTileColumn()]);
-			if (isCanConnect(newState.getState().getBoardGame()
-					[sourceState.getState().getCurrent().getTileRow()]
-							[sourceState.getState().getCurrent().getTileColumn()]
-							,newState.getState().getBoardGame()
-							[newState.getState().getNumberOfRows()]
-									[newState.getState().getNumberOfColumns()]) 
-											&& !isExistLoop(newState)) 
+			newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()][neighboringStates.get(i)
+					.getTileColumn()].rotateTile(j);
+			newState.getState().setCurrent(
+					newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()][neighboringStates.get(i)
+							.getTileColumn()]);
+			if (isCanConnect(
+					newState.getState().getBoardGame()[sourceState.getState().getCurrent().getTileRow()][sourceState
+							.getState().getCurrent().getTileColumn()],
+					newState.getState().getBoardGame()[newState.getState().getNumberOfRows()][newState.getState()
+							.getNumberOfColumns()])
+					&& !isExistLoop(newState))
 				possibleStatesList.add(newState);
 		}
 	}
 
-
-
 	protected boolean isCanConnect(MyTile current, MyTile next) {
 		String currentValue = new String(current.getTileValue());
 		String nextValue = new String(next.getTileValue());
-		
-		//making sure they are close enough to actually be able to connect
-		if (Math.abs(current.getTileRow() - next.getTileRow()) + 
-				Math.abs(current.getTileColumn() - next.getTileColumn()) > 1)
+
+		// making sure they are close enough to actually be able to connect
+		if (Math.abs(current.getTileRow() - next.getTileRow())
+				+ Math.abs(current.getTileColumn() - next.getTileColumn()) > 1)
 			return false;
-		
-		if (current.getTileValue().equals(" ") || ((current.getTileValue().equals("s") || current.getTileValue().equals("g"))
-				&& (next.getTileValue().equals("s") || next.getTileValue().equals("g") || next.getTileValue().equals(" " ))))
+
+		if (current.getTileValue().equals(" ")
+				|| ((current.getTileValue().equals("s") || current.getTileValue().equals("g"))
+						&& (next.getTileValue().equals("s") || next.getTileValue().equals("g")
+								|| next.getTileValue().equals(" "))))
 			return false;
-		else return true;
+		else
+			return true;
 	}
-
-
-
 
 	private boolean isExistLoop(State<PipeBoardGame> newState) {
 		State<PipeBoardGame> previousState = new State<PipeBoardGame>();
-		
+
 		if (newState.getPrevious() == null) {
 			return false;
-		}
-		else {
+		} else {
 			previousState = newState.getPrevious();
-			while(previousState.getPrevious() != null) {
-				if(previousState.getState() != null
+			while (previousState.getPrevious() != null) {
+				if (previousState.getState() != null
 						&& newState.getState().getCurrent().equals(previousState.getState().getCurrent())
-						&& newState.getState().getCurrent().toString().equals(previousState.getState().getCurrent().toString())) {
+						&& newState.getState().getCurrent().toString()
+								.equals(previousState.getState().getCurrent().toString())) {
 					newState = previousState;
 					return true;
 				}
@@ -307,128 +304,100 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 		return false;
 	}
 
-
-
-
-
-	//calculating a cost to the goal State, but i don't think
-	//this is a good way, better fix it
+	// calculating a cost to the goal State, but i don't think
+	// this is a good way, better fix it
 	private double calCost(PipeBoardGame state) {
-		return Double.valueOf(Math.abs(state.getCurrent().getTileColumn() - 
-				state.getGoal().getTileColumn() + 
-				Math.abs(state.getCurrent().getTileRow() - 
-						state.getGoal().getTileRow())));
+		return Double.valueOf(Math.abs(state.getCurrent().getTileColumn() - state.getGoal().getTileColumn()
+				+ Math.abs(state.getCurrent().getTileRow() - state.getGoal().getTileRow())));
 	}
-
-
-
-
 
 	private MyTile[][] getBoardGame() {
 		return this.getTiles();
 	}
 
-
-
-
-	
 	protected PipeBoardGame copyBoard(PipeBoardGame anotherBoard) {
-		
+
 		MyTile[][] copyTiles = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
 		MyTile source = anotherBoard.findSource(anotherBoard.getTiles());
 		MyTile goal = anotherBoard.findGoal(anotherBoard.getTiles());
 		MyTile current = anotherBoard.getSource();
-		
-		return new PipeBoardGame(copyTiles, anotherBoard.getNumberOfColumns(), 
-				anotherBoard.getNumberOfRows(), source, goal, current);
-	}
-	
 
+		return new PipeBoardGame(copyTiles, anotherBoard.getNumberOfColumns(), anotherBoard.getNumberOfRows(), source,
+				goal, current);
+	}
 
 	protected MyTile findSource(MyTile[][] boardGame) {
-		for(int i = 0 ; i < this.getNumberOfRows() ; i++)
-			for(int j=0;j< this.getNumberOfColumns() ;j++)
-				if(boardGame[j][i].getTileValue().equals('s'))
+		for (int i = 0; i < this.getNumberOfRows(); i++)
+			for (int j = 0; j < this.getNumberOfColumns(); j++)
+				if (boardGame[j][i].getTileValue().equals('s'))
 					return boardGame[i][j];
 		return null;
 	}
 
 	protected MyTile findGoal(MyTile[][] boardGame) {
-		for(int i = 0 ; i < this.getNumberOfRows() ; i++)
-			for(int j=0;j< this.getNumberOfColumns() ;j++)
-				if(boardGame[j][i].getTileValue().equals('g'))
+		for (int i = 0; i < this.getNumberOfRows(); i++)
+			for (int j = 0; j < this.getNumberOfColumns(); j++)
+				if (boardGame[j][i].getTileValue().equals('g'))
 					return boardGame[i][j];
 		return null;
 	}
 
-
-
-
-
-	//getting all the possible differand NeighoringTiles we can get
-	//we put them into a collection ArrayList to make sure we won't repeat 
-	//the same one
+	// getting all the possible differand NeighoringTiles we can get
+	// we put them into a collection ArrayList to make sure we won't repeat
+	// the same one
 	private Collection<MyTile> getNeighboringTiles(MyTile current) {
-		
-		//an ArrayList<MyTile> to make sure we won't create duplicate states
+
+		// an ArrayList<MyTile> to make sure we won't create duplicate states
 		ArrayList<MyTile> neighboringTiles = new ArrayList<MyTile>();
-		
-		
-			//upper Tile
-			if (current.getTileRow() != 0)
-			neighboringTiles.add(this.getTiles()
-					[current.getTileColumn()][current.getTileRow() - 1]);
-			//lower Tile
-			if (current.getTileRow() != this.getNumberOfRows())
-			neighboringTiles.add(this.getTiles()
-					[current.getTileColumn()][current.getTileRow() + 1]);
-			//left Tile
-			if (current.getTileColumn() != 0)
-			neighboringTiles.add(this.getTiles()
-					[current.getTileColumn() - 1][current.getTileRow()]);
-			//right Tile
-			if (current.getTileColumn() != this.getNumberOfColumns())
-			neighboringTiles.add(this.getTiles()
-					[current.getTileColumn() + 1][current.getTileRow()]);
+
+		// upper Tile
+		if (current.getTileRow() != 0)
+			neighboringTiles.add(this.getTiles()[current.getTileColumn()][current.getTileRow() - 1]);
+		// lower Tile
+		if (current.getTileRow() != this.getNumberOfRows())
+			neighboringTiles.add(this.getTiles()[current.getTileColumn()][current.getTileRow() + 1]);
+		// left Tile
+		if (current.getTileColumn() != 0)
+			neighboringTiles.add(this.getTiles()[current.getTileColumn() - 1][current.getTileRow()]);
+		// right Tile
+		if (current.getTileColumn() != this.getNumberOfColumns())
+			neighboringTiles.add(this.getTiles()[current.getTileColumn() + 1][current.getTileRow()]);
 		return neighboringTiles;
 	}
-	
-	
-	/*this methods gets the board as a String, much like the C'Tor that gets a Board
-	*and converts it to MyTiles[][]
-	*we convert the original game to a unique String so we know that even if the 
-	*client changes the same game, there's no need to re-solve the slightly 
-	*Differently represented board
-	*
-	*For the PipeBoardGame, we consider the following Tiles as the same kind:
-	*UniqueId - Kind of the pipe in the Tile
-	* 1 - Curved Pipes: 'L', 'F', '7', 'J'
-	* 2 - Straight Pipes: '|', '-'
-	* 3 - Source Pipe: 's'
-	* 4 - Goal Pipe: 'g'
-	* 5 - Empty Tile:' '
-	* 6 - End of line: '\n'
-	*/
-	//@Override
+
+	/*
+	 * this methods gets the board as a String, much like the C'Tor that gets a
+	 * Board and converts it to MyTiles[][] we convert the original game to a unique
+	 * String so we know that even if the client changes the same game, there's no
+	 * need to re-solve the slightly Differently represented board
+	 *
+	 * For the PipeBoardGame, we consider the following Tiles as the same kind:
+	 * UniqueId - Kind of the pipe in the Tile 1 - Curved Pipes: 'L', 'F', '7', 'J'
+	 * 2 - Straight Pipes: '|', '-' 3 - Source Pipe: 's' 4 - Goal Pipe: 'g' 5 -
+	 * Empty Tile:' ' 6 - End of line: '\n'
+	 */
+	// @Override
 	public String getStringUniqueId(String inputBuffer) {
-		//splitting the inputBuffer from the client to an array of Strings
-		//Each String in the array hold a single row.
-		//The last String in the array holds "done".
-		
-		//variables
+		// splitting the inputBuffer from the client to an array of Strings
+		// Each String in the array hold a single row.
+		// The last String in the array holds "done".
+
+		// variables
 		String[] splitter = inputBuffer.split("\n");
 		String uniqueId = new String("");
-		
-		//forEach string (row on the table)
+
+		// forEach string (row on the table)
 		for (String string : splitter) {
-			//checking if we reached the "done" string
+			// checking if we reached the "done" string
 			if (!string.equals("done")) {
-				//forEach character (column in the current row)
+				// forEach character (column in the current row)
 				for (Character character : string.toCharArray()) {
-					//converting the character to its unique ID number, saving it as a character and not as an Integer
+					// converting the character to its unique ID number, saving it as a character
+					// and not as an Integer
 					switch (character) {
-					//1 - Curved Pipes: 'L', 'F', '7', 'J'
-					case 'L': //need to check if there's a chance for HigherCase, LowerCase to avoid CaseSensitive problems
+					// 1 - Curved Pipes: 'L', 'F', '7', 'J'
+					case 'L': // need to check if there's a chance for HigherCase, LowerCase to avoid
+								// CaseSensitive problems
 					case 'l':
 					case 'F':
 					case 'f':
@@ -437,51 +406,48 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 					case 'j':
 						uniqueId = uniqueId.concat("1");
 						break;
-					//2 - Straight Pipes: '|', '-'
+					// 2 - Straight Pipes: '|', '-'
 					case '|':
 					case '-':
 						uniqueId = uniqueId.concat("2");
 						break;
-					//3 - Source Pipe: 's'
-						case 's':
-						case 'S':
-							uniqueId = uniqueId.concat("3");
+					// 3 - Source Pipe: 's'
+					case 's':
+					case 'S':
+						uniqueId = uniqueId.concat("3");
 						break;
-					//4 - Goal Pipe: 'g'
+					// 4 - Goal Pipe: 'g'
 					case 'g':
 					case 'G':
 						uniqueId = uniqueId.concat("4");
 						break;
-					//5 - Empty Tile:' '
+					// 5 - Empty Tile:' '
 					case ' ':
 						uniqueId = uniqueId.concat("5");
 						break;
-					//6 - End of line: '\n'
+					// 6 - End of line: '\n'
 					case '\n':
 						uniqueId = uniqueId.concat("6");
-							break;
+						break;
 					default:
 						break;
 					}
 				}
-			}
-			else {
+			} else {
 				uniqueId = uniqueId.concat("done\n");
 			}
 		}
 		return uniqueId;
 	}
+
 	@Override
 	public boolean IsGoalState(State<PipeBoardGame> currentState) {
 		return currentState.getState().isSolved();
 	}
+
 	private boolean isSolved() {
-		
+
 		return false;
 	}
-
-	
-
-
 
 }

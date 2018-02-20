@@ -5,16 +5,14 @@ package server;
 public class SearcherAdapterSolver implements ISolver {
 
 	private ISearcher<MyTile[][]> searcher;
-	
+
 	public SearcherAdapterSolver(ISearcher<MyTile[][]> searcher) {
 		this.searcher = searcher;
 	}
-	
-	//@Override
+
+	// @Override
 	public Solution solve(ISearchable<MyTile[][]> searchable) {
 		return searcher.search(searchable);
 	}
-
-
 
 }
