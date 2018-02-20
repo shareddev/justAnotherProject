@@ -30,7 +30,7 @@ public class MyClientHandler implements IClientHandler {
 		this(new MyCacheManager(
 				System.getProperty("user.dir") + "\\pipeSolutions\\", 
 					new Solution()));	
-		this.searchable = ; 
+		this.searchable = new PipeBoardGame(); 
 	}
 	//C'Tor
 	public MyClientHandler(ICacheManager cacheManager) {
@@ -40,8 +40,7 @@ public class MyClientHandler implements IClientHandler {
 	//Methods
 	@Override
 	//gets a client input and output from IServer
-	public void handleClient(InputStream input, 
-			OutputStream output) {
+	public void handleClient(InputStream input, OutputStream output) {
 		//converts the input and output stream into Strings
 		bufferReader = new BufferedReader(new InputStreamReader(input));
 		//other people from class said it's better to use PrintWriter, need to test
@@ -49,29 +48,19 @@ public class MyClientHandler implements IClientHandler {
 		
 		//converting the bufferReader to a string
 		this.inputBuffer = bufferedToString(bufferReader);
-		
-		//we're using the stringToUnique via the ISearchable because the uniqueness of the string
-		//is determined by the values the tiles in the board hold, thus the kind of Game will
-		//decide how to recognize each tile.
-		String uniqueCheck = this.searchable.getStringUniqueId(this.inputBuffer);
-		
+			
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
-		if(this.cacheManager.isExistSolution(uniqueCheck)) {
-			writeSolutionToClient(this.getRequiredChanges(this.cacheManager.getSolution(uniqueCheck)), bufferWriter);
+		if(this.cacheManager.isExistSolution(this.inputBuffer)) {
+			writeSolutionToClient(this.cacheManager.getSolution(this.inputBuffer), bufferWriter);
 		}
 		else {
-			
+			this.getSolver().solve(this.inputBuffer);
 		}
 			
 	}
-	//converts the changes that we need to make
-	private String getRequiredChanges(String solution) {
-		String changes = new String("");
-		
-	}
-	
+
 	//Converting the solution from a String to a PrintWriter
 	//making sure that each and every rotation is sent with a tiny delay (not a single message)
 	//so the rotations in the client would happen one after the other
@@ -104,14 +93,9 @@ public class MyClientHandler implements IClientHandler {
 	
 	@Override
 	public ISolver getSolver() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.solver;
 	}
 	
-	//converts a boardGame to a unique String identifier to make sure
-	//we're talking about the same game when sending to the ICacheManager
-	public String stringToUnique(String string) {
-		return this.searchable.getStringUniqueId(string);
-	}
+	
 
 }

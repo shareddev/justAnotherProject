@@ -20,7 +20,7 @@ public class MyServer implements IServer {
 	
 	@Override
 	public void start(IClientHandler clientHandler) {
-		this.clientHandler = clientHandler;
+		//this.clientHandler = clientHandler;
 		try {
 			//run private method from start();
 			run();
@@ -42,6 +42,7 @@ public class MyServer implements IServer {
 				InputStream inFromClient=clientSocket.getInputStream();
 				OutputStream outToClient=clientSocket.getOutputStream();
 				
+				this.clientHandler = new IClientHandler(inFromClient);
 				clientHandler.handleClient(inFromClient, outToClient);
 				
 				inFromClient.close();

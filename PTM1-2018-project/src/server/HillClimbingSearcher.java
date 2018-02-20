@@ -30,7 +30,7 @@ class HillClimbingSearcher implements ISearcher<MyTile[][]> {
 
         //Loop until the goal state is achieved or no more operators can be applied on the current state:
         while (System.currentTimeMillis() - time0 < timeToRun) {
-            List<State<MyTile[][]>> neighbors = searchable.getAllStates(next);
+            ArrayList<State<MyTile[][]>> neighbors = searchable.getAllStates(next);
 
             if (Math.random() < 0.7) { // with a high probability
                 // find the best one

@@ -204,7 +204,7 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 	
 	//getting all possible states that our board can produce
 	@Override
-	public Collection<State<PipeBoardGame>> getAllStates(
+	public ArrayList<State<MyTile[][]>> getAllStates(
 			State<PipeBoardGame> sourceState){
 		
 		//setting an ArrayList to hold all the possible states we will create
