@@ -51,14 +51,11 @@ public class MyClientHandler implements IClientHandler {
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
 		//we will send the board to the ISolver
-		if(this.cacheManager.isExistSolution(this.inputBuffer)) {
-			writeSolutionToClient(timeToRotate(this.cacheManager.getSolution(boardToUniqueId(this.inputBuffer))), bufferWriter);
-		}
-		else {
+		if(!this.cacheManager.isExistSolution(this.inputBuffer)) {
 			this.solution = this.getSolver().solve(searchable);
 			this.cacheManager.addSolution(boardToUniqueId(this.inputBuffer), solution.toString());
-			writeSolutionToClient();
 		}
+		writeSolutionToClient(timeToRotate(this.cacheManager.getSolution(boardToUniqueId(this.inputBuffer))), bufferWriter);
 			
 	}
 
