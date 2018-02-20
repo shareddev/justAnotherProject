@@ -56,7 +56,8 @@ public class MyClientHandler implements IClientHandler {
 			writeSolutionToClient(this.cacheManager.getSolution(this.inputBuffer), bufferWriter);
 		}
 		else {
-			this.getSolver().solve(this.inputBuffer);
+			this.getSolver().solve(searchable);
+			writeSolutionToClient()
 		}
 			
 	}

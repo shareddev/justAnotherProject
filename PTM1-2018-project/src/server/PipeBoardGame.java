@@ -208,8 +208,8 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 			State<PipeBoardGame> sourceState){
 		
 		//setting an ArrayList to hold all the possible states we will create
-		ArrayList<State<PipeBoardGame>> possibleStatesList = 
-				new ArrayList<State<PipeBoardGame>>();
+		ArrayList<State<MyTile[][]>> possibleStatesList = 
+				new ArrayList<State<MyTile[][]>>();
 		
 		//creating a list of possible changes of the "Neighboring" States
 		ArrayList<MyTile> neighboringStates = new ArrayList<MyTile>(
@@ -237,7 +237,7 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 
 
 	//Rotating according to the PipeGame, need to just after testing
-	private void rotateNeighbotingTile(ArrayList<State<PipeBoardGame>> possibleStatesList, 
+	private void rotateNeighbotingTile(ArrayList<State<MyTile[][]>> possibleStatesList, 
 			State<PipeBoardGame> newState,State<PipeBoardGame> sourceState, 
 				ArrayList<MyTile> neighboringStates, int timesToRotate, int i) {
 		//resetting the given newState to add to the possibleStatesList
