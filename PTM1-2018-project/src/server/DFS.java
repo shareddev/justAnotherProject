@@ -5,7 +5,6 @@ import java.util.Stack;
 
 
 public class DFS<T> extends CommonSearcherAbstract<T> {
-
 	//visited - colored black
 	private ArrayList<State<T>> black = new ArrayList<State<T>>();
 	private Stack<State<T>> stack = new Stack<State<T>>();

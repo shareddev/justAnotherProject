@@ -9,7 +9,6 @@ public class MySolver implements ISolver {
 	//has to be for same kind of GAME as the ISolver
 	private ISearchable<MyTile[][]> searchable;
 
-	
 	public MySolver(ISearcher<MyTile[][]> searcher) {
 		this.searcher = searcher;
 	}
