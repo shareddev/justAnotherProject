@@ -22,7 +22,7 @@ class HillClimbingSearcher implements ISearcher<MyTile[][]> {
     @Override
     public Solution search(ISearchable<MyTile[][]> searchable) {
         //Define the current state as an initial state
-        State<MyTile[][]> next = searchable.getInitialState();
+        State<PipeBoardGame> next = searchable.getInitialState();
         Solution result = new Solution();
         
         long time0 = System.currentTimeMillis();
@@ -30,12 +30,12 @@ class HillClimbingSearcher implements ISearcher<MyTile[][]> {
 
         //Loop until the goal state is achieved or no more operators can be applied on the current state:
         while (System.currentTimeMillis() - time0 < timeToRun) {
-            ArrayList<State<MyTile[][]>> neighbors = searchable.getAllStates(next);
+            ArrayList<State<PipeBoardGame>> neighbors = searchable.getAllStates(next);
 
             if (Math.random() < 0.7) { // with a high probability
                 // find the best one
                 int grade = 0;
-                for (State<MyTile[][]> step : neighbors) {
+                for (State<PipeBoardGame> step : neighbors) {
                     int g = grader.grade(step);
                     if (g > grade) {
                         grade = g;

@@ -53,7 +53,15 @@ public class MyCacheManager implements ICacheManager {
 	}
 	@Override
 	public String getSolution(String key) {
-		return this.solutions.get(key).toString();
+		if (this.isExistSolution(key))
+			return this.solutions.get(key).toString();
+		else return null;
 	}
+	@Override
+	public void addSolution(String boardToUniqueId, String solution) {
+		this.solutions.put(boardToUniqueId, solution);
+	}
+	
+	
 
 }
