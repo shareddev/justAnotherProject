@@ -162,13 +162,42 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 	}
 	
 	
+	private boolean isExistSourceToGoalPath() {
+		ArrayList<MyTile> neighbors = new ArrayList<MyTile>
+		(this.getNeighboringTiles(this.getSource()));
+		
+		for (int i = 0; i < neighbors.size() ; i++) {
+			if(this.isPath(neighbors.get(i), this.getSource()))
+				return true;
+		}
+		return false;
+	}
+
+	protected boolean isPath(MyTile current, MyTile previous) {
+		if(this.isCanConnect(previous, current)) {
+			ArrayList<MyTile> neighbors = new ArrayList<MyTile>
+			(this.getNeighboringTiles(current));
+			
+			for (int i = 0; i < neighbors.size() ; i++) {
+				if(neighbors.get(i).equals(previous))
+					neighbors.remove(i);
+			}
+			
+			for (int i = 0; i < neighbors.size() ; i++) {
+				if(this.isCanConnect(neighbors.get(i), current)
+						&& neighbors.get(i).getTileValue().equals(this.getGoal().getTileValue())) {
+					return true;
+				}
+				else return isPath(neighbors.get(i), current);
+			}
+		}
+		return false;
+	}
+
 	//an abstract method for each Game to 
 	@Override
-	public State<PipeBoardGame> getInitialState();
-	
-	   {
-		return this
-		return null;
+	public State<PipeBoardGame> getInitialState() {
+		return (new State<PipeBoardGame>(this));
 	}
 	
 	
