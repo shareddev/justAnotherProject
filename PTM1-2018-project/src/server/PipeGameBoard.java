@@ -191,19 +191,6 @@ public class PipeGameBoard extends BoardGame {
 	}
 
 
-	@Override
-	public boolean getGoalState(State<BoardGame> goalState) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public State<PipeGameBoard> getInitialState() {
-		return (new State<PipeGameBoard>(this));
-	}
-
-
 	/*this methods gets the board as a String, much like the C'Tor that gets a Board
 	*and converts it to MyTiles[][]
 	*we convert the original game to a unique String so we know that even if the 
@@ -219,7 +206,7 @@ public class PipeGameBoard extends BoardGame {
 	* 5 - Empty Tile:' '
 	* 6 - End of line: '\n'
 	*/
-	@Override
+	//@Override
 	public String getStringUniqueId(String inputBuffer) {
 		//splitting the inputBuffer from the client to an array of Strings
 		//Each String in the array hold a single row.

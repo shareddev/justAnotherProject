@@ -2,16 +2,16 @@ package server;
 
 //The object adapter that bridges between ISearcher to ISolver
 //The ISolver injects the needed algorithm here
-public class SearcherAdapterSolver<T> implements ISolver<T> {
+public class SearcherAdapterSolver implements ISolver {
 
-	private ISearcher<T> searcher;
+	private ISearcher<MyTile[][]> searcher;
 	
-	public SearcherAdapterSolver(ISearcher<T> searcher) {
+	public SearcherAdapterSolver(ISearcher<MyTile[][]> searcher) {
 		this.searcher = searcher;
 	}
 	
-	@Override
-	public Solution<T> solve(ISearchable<T> searchable) {
+	//@Override
+	public Solution solve(ISearchable<MyTile[][]> searchable) {
 		return searcher.search(searchable);
 	}
 
