@@ -3,8 +3,8 @@ package server;
 import java.util.ArrayList;
 import java.util.Collection;
 
-//i might be over complicating this, maybe PipeGameBoard is really just enough
-public class PipeBoardGame {
+//i might be over complicating this, maybe PipeBoardGame is really just enough
+public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 	//variables
 	//MyTile is searchable
 	protected MyTile tiles[][];
@@ -17,7 +17,7 @@ public class PipeBoardGame {
 	protected int numberOfColumns;
 	
 	//C'Tor
-	public BoardGame(String board) {
+	public PipeBoardGame(String board) {
 		//counting the numberOfRows and numberOfColumns
 		setFromStringNumberOfColumnsAndRows(board);
 		//converting the String the represents a board to a 2D MyTiles array
@@ -28,7 +28,7 @@ public class PipeBoardGame {
 		this.setCurrent(this.source);
 	}
 	
-	public BoardGame(MyTile[][] Tiles, int numberOfColumns, 
+	public PipeBoardGame(MyTile[][] Tiles, int numberOfColumns, 
 			int numberOfRows, MyTile source, MyTile goal, MyTile current) {
 		this.setTiles(tiles);
 		this.setNumberOfColumns(numberOfColumns);
@@ -119,7 +119,7 @@ public class PipeBoardGame {
 		}
 	}
 	//Override
-	public boolean equals(BoardGame boardGame) {
+	public boolean equals(PipeBoardGame boardGame) {
 		if(this.getCurrent().equals(boardGame.getCurrent())
 				&& this.getCurrent().getTileValue()
 					.equals(boardGame.getCurrent().getTileValue()))
@@ -129,11 +129,11 @@ public class PipeBoardGame {
 	
 	@Override
 	public boolean equals(Object object) {
-		if (!(object instanceof BoardGame))
+		if (!(object instanceof PipeBoardGame))
 				return false;
 		if (object == this)
 			return true;
-		else return this.equals((BoardGame) object);
+		else return this.equals((PipeBoardGame) object);
 	}
 	
 	//converts the Tiles[][] back to a string the represents a BoardGame
@@ -150,9 +150,9 @@ public class PipeBoardGame {
 	}
 	
 	//an abstract method for each Game to decide if the current State is the desired State
-	//@Override
-	//public abstract boolean getGoalState(State<BoardGame> goalState);
-	/*{
+	@Override
+	public boolean getGoalState(State<PipeBoardGame> goalState)
+	{
 		ArrayList<MyTile> neighbors = new ArrayList<MyTile>(this.getNeighboringTiles(this.getSource()));
 		for (int i = 0; i < neighbors.size() ; i++) {
 			if(isExistSourceToGoalPath())
@@ -160,27 +160,27 @@ public class PipeBoardGame {
 		}
 		return false;
 	}
-	*/
+	
 	
 	//an abstract method for each Game to 
-	//@Override
-	//public abstract State<BoardGame> getInitialState();
-	/*
+	@Override
+	public State<PipeBoardGame> getInitialState();
+	
 	   {
 		return this
 		return null;
 	}
-	*/
+	
 	
 	
 	//getting all possible states that our board can produce
 	@Override
-	public Collection<State<BoardGame>> getAllStates(
-			State<BoardGame> sourceState){
+	public Collection<State<PipeBoardGame>> getAllStates(
+			State<PipeBoardGame> sourceState){
 		
 		//setting an ArrayList to hold all the possible states we will create
-		ArrayList<State<BoardGame>> possibleStatesList = 
-				new ArrayList<State<BoardGame>>();
+		ArrayList<State<PipeBoardGame>> possibleStatesList = 
+				new ArrayList<State<PipeBoardGame>>();
 		
 		//creating a list of possible changes of the "Neighboring" States
 		ArrayList<MyTile> neighboringStates = new ArrayList<MyTile>(
@@ -188,7 +188,7 @@ public class PipeBoardGame {
 						sourceState.getState().getCurrent()));
 		
 		//creating a temporary State for each iteration of a State
-		State<BoardGame> newState = new State<BoardGame>();
+		State<PipeBoardGame> newState = new State<PipeBoardGame>();
 		
 		for (int i = 0; i < neighboringStates.size() ; i++) {
 			String compare = new String("");
@@ -207,13 +207,13 @@ public class PipeBoardGame {
 	}
 
 
-	//Rotating according to the PipeGame, need to ajust after testing
-	private void rotateNeighbotingTile(ArrayList<State<BoardGame>> possibleStatesList, 
-			State<BoardGame> newState,State<BoardGame> sourceState, 
+	//Rotating according to the PipeGame, need to just after testing
+	private void rotateNeighbotingTile(ArrayList<State<PipeBoardGame>> possibleStatesList, 
+			State<PipeBoardGame> newState,State<PipeBoardGame> sourceState, 
 				ArrayList<MyTile> neighboringStates, int timesToRotate, int i) {
 		//resetting the given newState to add to the possibleStatesList
 		for (int j = 1 ; j < timesToRotate ; j++) {
-			newState = new State<BoardGame>(copyBoard(sourceState.getState()), 
+			newState = new State<PipeBoardGame>(copyBoard(sourceState.getState()), 
 					calCost(newState.getState()), sourceState);
 			
 			newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()]
@@ -371,8 +371,8 @@ public class PipeBoardGame {
 
 
 
-	private boolean isExistLoop(State<BoardGame> newState) {
-		State<BoardGame> previousState = new State<BoardGame>();
+	private boolean isExistLoop(State<PipeBoardGame> newState) {
+		State<PipeBoardGame> previousState = new State<PipeBoardGame>();
 		
 		if (newState.getCameFrom() == null) {
 			return false;
@@ -398,7 +398,7 @@ public class PipeBoardGame {
 
 	//calculating a cost to the goal State, but i don't think
 	//this is a good way, better fix it
-	private double calCost(BoardGame state) {
+	private double calCost(PipeBoardGame state) {
 		return Double.valueOf(Math.abs(state.getCurrent().getTileColumn() - 
 				state.getGoal().getTileColumn() + 
 				Math.abs(state.getCurrent().getTileRow() - 
@@ -416,15 +416,15 @@ public class PipeBoardGame {
 
 
 
-
-	protected BoardGame copyBoard(BoardGame anotherBoard) {
+	
+	protected PipeBoardGame copyBoard(PipeBoardGame anotherBoard) {
 		
 		MyTile[][] copyTiles = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
 		MyTile source = anotherBoard.findSource(anotherBoard.getTiles());
 		MyTile goal = anotherBoard.findGoal(anotherBoard.getTiles());
 		MyTile current = anotherBoard.getSource();
 		
-		return new PipeGameBoard(copyTiles, anotherBoard.getNumberOfColumns(), 
+		return new PipeBoardGame(copyTiles, anotherBoard.getNumberOfColumns(), 
 				anotherBoard.getNumberOfRows(), source, goal, current);
 	}
 	
@@ -485,7 +485,7 @@ public class PipeBoardGame {
 	*client changes the same game, there's no need to re-solve the slightly 
 	*Differently represented board
 	*
-	*For the PipeGameBoard, we consider the following Tiles as the same kind:
+	*For the PipeBoardGame, we consider the following Tiles as the same kind:
 	*UniqueId - Kind of the pipe in the Tile
 	* 1 - Curved Pipes: 'L', 'F', '7', 'J'
 	* 2 - Straight Pipes: '|', '-'
