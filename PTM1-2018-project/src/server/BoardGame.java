@@ -56,22 +56,22 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	}
 	
 	//Getters
-	public MyTile[][] getTiles() {
+	protected MyTile[][] getTiles() {
 		return this.tiles;
 	}
-	public MyTile getGoal() {
+	protected MyTile getGoal() {
 		return this.goal;
 	}
-	public MyTile getSource() {
+	protected MyTile getSource() {
 		return this.source;
 	}
-	public MyTile getCurrent() {
+	protected MyTile getCurrent() {
 		return this.current;
 	}
-	public int getNumberOfRows() {
+	protected int getNumberOfRows() {
 		return this.numberOfRows;
 	}
-	public int getNumberOfColumns() {
+	protected int getNumberOfColumns() {
 		return this.numberOfColumns;
 	}
 	//Setters

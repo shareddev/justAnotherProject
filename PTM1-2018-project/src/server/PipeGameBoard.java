@@ -12,7 +12,7 @@ public class PipeGameBoard extends BoardGame {
 
 	public PipeGameBoard(MyTile[][] copyTiles, int numberOfColumns, int numberOfRows, MyTile source, MyTile goal,
 			MyTile current) {
-		this.
+		
 	}
 
 	@Override
@@ -172,15 +172,18 @@ public class PipeGameBoard extends BoardGame {
 		MyTile goal = anotherBoard.findGoal(anotherBoard.getTiles());
 		MyTile current = anotherBoard.getSource();
 		
+		copyMyTilesArray(anotherBoard, copyTiles);
+		
+		return new PipeGameBoard(copyTiles, anotherBoard.getNumberOfColumns(), anotherBoard.getNumberOfRows(), source, goal, current);
+	}
+
+	private void copyMyTilesArray(BoardGame anotherBoard, MyTile[][] copyTiles) {
 		for (int i = 0; i < anotherBoard.getNumberOfRows(); i++) {
 			for (int j = 0; j < anotherBoard.getNumberOfColumns(); j++) {
 				copyTiles[j][i] = new MyTile(anotherBoard.getTiles()[j][i].getTileColumn(), anotherBoard.getBoardGame()[j][i].getTileRow(), anotherBoard.getBoardGame()[j][i].getTileValue());
 				
 			}
 		}
-		
-		
-		return new PipeGameBoard(copyTiles, anotherBoard.getNumberOfColumns(), anotherBoard.getNumberOfRows(), source, goal, current);
 	}
 
 
