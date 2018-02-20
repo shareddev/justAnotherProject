@@ -1,4 +1,4 @@
-package test;
+package server;
 
 /*
  * ISolver handles an un-solved board game.

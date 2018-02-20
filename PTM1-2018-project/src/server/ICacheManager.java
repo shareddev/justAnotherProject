@@ -1,4 +1,4 @@
-package test;
+package server;
 
 //the ICacheManager manages the stores solutions
 //the solutions are stored in hashmap for quick respons and files

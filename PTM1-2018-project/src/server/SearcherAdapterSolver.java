@@ -1,4 +1,4 @@
-package test;
+package server;
 
 //The object adapter that bridges between ISearcher to ISolver
 //The ISolver injects the needed algorithm here

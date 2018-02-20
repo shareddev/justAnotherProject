@@ -1,4 +1,4 @@
-package test;
+package server;
 
 public interface IServer {
 	public void start(IClientHandler clientHandler);

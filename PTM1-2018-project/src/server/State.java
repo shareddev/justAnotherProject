@@ -1,4 +1,4 @@
-package test;
+package server;
 
 import java.io.Serializable;
 //a State represents an entire board
