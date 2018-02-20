@@ -17,12 +17,14 @@ public class State<T> implements Comparable<State<T>>, Serializable {
 
 	//C'tor
 	public State() {
-		this(null);
+		super();
 	}
 	public State(T state) {
-		this(state, 0.0, null);
+		super();
+		this.setState(state);
 	}
 	public State(T state, double cost, State<T> cameFrom) {
+		super();
 		this.state = state;
 		this.cost = cost;
 		this.cameFrom = cameFrom;

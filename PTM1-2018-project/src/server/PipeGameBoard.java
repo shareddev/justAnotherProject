@@ -1,6 +1,6 @@
 package server;
 
-import java.util.Collection;
+
 //PipeGameBoard is the implementation of the BoardGame
 //this Class determines that we are specifically playing a PipeGame
 public class PipeGameBoard extends BoardGame {
@@ -199,8 +199,87 @@ public class PipeGameBoard extends BoardGame {
 
 
 	@Override
-	public State<BoardGame> getInitialState() {
-		return (new State<BoardGane>(this));
+	public State<PipeGameBoard> getInitialState() {
+		return (new State<PipeGameBoard>(this));
+	}
+
+
+	/*this methods gets the board as a String, much like the C'Tor that gets a Board
+	*and converts it to MyTiles[][]
+	*we convert the original game to a unique String so we know that even if the 
+	*client changes the same game, there's no need to re-solve the slightly 
+	*Differently represented board
+	*
+	*For the PipeGameBoard, we consider the following Tiles as the same kind:
+	*UniqueId - Kind of the pipe in the Tile
+	* 1 - Curved Pipes: 'L', 'F', '7', 'J'
+	* 2 - Straight Pipes: '|', '-'
+	* 3 - Source Pipe: 's'
+	* 4 - Goal Pipe: 'g'
+	* 5 - Empty Tile:' '
+	* 6 - End of line: '\n'
+	*/
+	@Override
+	public String stringToUnique(String inputBuffer) {
+		//splitting the inputBuffer from the client to an array of Strings
+		//Each String in the array hold a single row.
+		//The last String in the array holds "done".
+		
+		//variables
+		String[] splitter = inputBuffer.split("\n");
+		String uniqueId = new String("");
+		
+		//forEach string (row on the table)
+		for (String string : splitter) {
+			//checking if we reached the "done" string
+			if (!string.equals("done")) {
+				//forEach character (column in the current row)
+				for (Character character : string.toCharArray()) {
+					//converting the character to its unique ID number, saving it as a character and not as an Integer
+					switch (character) {
+					//1 - Curved Pipes: 'L', 'F', '7', 'J'
+					case 'L': //need to check if there's a chance for HigherCase, LowerCase to avoid CaseSensitive problems
+					case 'l':
+					case 'F':
+					case 'f':
+					case '7':
+					case 'J':
+					case 'j':
+						uniqueId = uniqueId.concat("1");
+						break;
+					//2 - Straight Pipes: '|', '-'
+					case '|':
+					case '-':
+						uniqueId = uniqueId.concat("2");
+						break;
+					//3 - Source Pipe: 's'
+						case 's':
+						case 'S':
+							uniqueId = uniqueId.concat("3");
+						break;
+					//4 - Goal Pipe: 'g'
+					case 'g':
+					case 'G':
+						uniqueId = uniqueId.concat("4");
+						break;
+					//5 - Empty Tile:' '
+					case ' ':
+						uniqueId = uniqueId.concat("5");
+						break;
+					//6 - End of line: '\n'
+					case '\n':
+						uniqueId = uniqueId.concat("6");
+							break;
+					default:
+						break;
+					}
+				}
+			}
+			else {
+				uniqueId = uniqueId.concat("done\n");
+			}
+		}
+		return uniqueId;
 	}
 
 

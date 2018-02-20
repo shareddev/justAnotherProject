@@ -47,14 +47,13 @@ public class MyClientHandler implements IClientHandler {
 		//other people from class said it's better to use PrintWriter, need to test
 		bufferWriter = new PrintWriter(new OutputStreamWriter(output));
 		
-		//need to talk with Nathan, should we surround with exception?
 		//converting the bufferReader to a string
 		this.inputBuffer = bufferedToString(bufferReader);
 		
 		//we're using the stringToUnique via the ISearchable because the uniqueness of the string
 		//is determined by the values the tiles in the board hold, thus the kind of Game will
 		//decide how to recognize each tile.
-		String uniqueCheck = this.searchable.stringToUnique(inputBuffer);
+		String uniqueCheck = this.searchable.stringToUnique(this.inputBuffer);
 		
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
