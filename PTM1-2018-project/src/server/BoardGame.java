@@ -6,6 +6,7 @@ import java.util.Collection;
 //i might be over complicating this, maybe PipeGameBoard is really just enough
 public abstract class BoardGame {
 	//variables
+	//MyTile is searchable
 	protected MyTile tiles[][];
 	protected MyTile source;
 	protected MyTile goal;
@@ -149,8 +150,8 @@ public abstract class BoardGame {
 	}
 	
 	//an abstract method for each Game to decide if the current State is the desired State
-	@Override
-	public abstract boolean getGoalState(State<BoardGame> goalState);
+	//@Override
+	//public abstract boolean getGoalState(State<BoardGame> goalState);
 	/*{
 		ArrayList<MyTile> neighbors = new ArrayList<MyTile>(this.getNeighboringTiles(this.getSource()));
 		for (int i = 0; i < neighbors.size() ; i++) {
@@ -162,14 +163,16 @@ public abstract class BoardGame {
 	*/
 	
 	//an abstract method for each Game to 
-	@Override
-	public abstract State<BoardGame> getInitialState();
+	//@Override
+	//public abstract State<BoardGame> getInitialState();
 	/*
 	   {
 		return this
 		return null;
 	}
 	*/
+	
+	/*
 	//getting all possible states that our board can produce
 	@Override
 	public Collection<State<BoardGame>> getAllStates(
@@ -202,7 +205,7 @@ public abstract class BoardGame {
 		}
 		return possibleStatesList;
 	}
-
+*/
 
 	//Rotating according to the PipeGame, need to ajust after testing
 	private void rotateNeighbotingTile(ArrayList<State<BoardGame>> possibleStatesList, 
