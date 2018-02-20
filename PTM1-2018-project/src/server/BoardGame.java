@@ -295,29 +295,29 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 			//Checking left
 			if(next.getTileColumn() < current.getTileColumn() && next.getTileRow() == current.getTileRow())
 			{
-				if(next.getTileValue()=='-' || next.getTileValue()=='L' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
+				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F") || nextValue.equals("g"))
 					return true;
 			}
 			//Checking down
 			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()>current.getTileRow())
 			{
-				if(next.getTileValue()=='|' || next.getTileValue()=='L' || next.getTileValue()=='J'|| next.getTileValue()=='g')
+				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J") || nextValue.equals("g"))
 					return true;
 			}
 		}
 		
-		else if(current.getTileValue()=='J')
+		else if(currentValue.equals("J"))
 		{
 			//Checking left
 			if(next.getTileColumn()<current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(next.getTileValue()=='-' || next.getTileValue()=='L' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
+				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F")|| nextValue.equals("g"))
 					return true;
 			}
 			//Checking up
-			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
+			else if(next.getTileColumn() == current.getTileColumn() && next.getTileRow() < current.getTileRow())
 			{
-				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
+				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F") || nextValue.equals("g"))
 					return true;
 			}
 			
