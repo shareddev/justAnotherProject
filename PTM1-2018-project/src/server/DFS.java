@@ -56,17 +56,6 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 	private boolean openClosedContainsNeighbor(State<T> state, ArrayList<State<T>> explored) 
 	{
 		boolean flag = false;
-
-//		Iterator<State<T>> openListItartor = queue.iterator();
-
-//		while (openListItartor.hasNext()) {
-//			if (checkedState.equals(openListItartor.next())) {
-//				flag = true;
-//				return flag;
-//			}
-//
-//		}
-
 		for (State<T> s : explored) {
 			if (state.equals(s)) {
 				flag = true;
@@ -80,7 +69,7 @@ public class DFS<T> extends CommonSearcherAbstract<T> implements ISearcher<T> {
 
 	@Override
 	public Solution search(ISearchable<T> searchable) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
