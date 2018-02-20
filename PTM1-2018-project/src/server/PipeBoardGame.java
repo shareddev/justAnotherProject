@@ -204,12 +204,12 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 	
 	//getting all possible states that our board can produce
 	@Override
-	public ArrayList<State<MyTile[][]>> getAllStates(
+	public ArrayList<State<PipeBoardGame>> getAllStates(
 			State<PipeBoardGame> sourceState){
 		
 		//setting an ArrayList to hold all the possible states we will create
-		ArrayList<State<MyTile[][]>> possibleStatesList = 
-				new ArrayList<State<MyTile[][]>>();
+		ArrayList<State<PipeBoardGame>> possibleStatesList = 
+				new ArrayList<State<PipeBoardGame>>();
 		
 		//creating a list of possible changes of the "Neighboring" States
 		ArrayList<MyTile> neighboringStates = new ArrayList<MyTile>(
@@ -237,12 +237,12 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 
 
 	//Rotating according to the PipeGame, need to just after testing
-	private void rotateNeighbotingTile(ArrayList<State<MyTile[][]>> possibleStatesList, 
-			State<MyTile[][]> newState,State<MyTile[][]> sourceState, 
+	private void rotateNeighbotingTile(ArrayList<State<PipeBoardGame>> possibleStatesList, 
+			State<PipeBoardGame> newState,State<PipeBoardGame> sourceState, 
 				ArrayList<MyTile> neighboringStates, int timesToRotate, int i) {
 		//resetting the given newState to add to the possibleStatesList
 		for (int j = 1 ; j < timesToRotate ; j++) {
-			newState = new State<MyTile[][]>(copyBoard(sourceState.getState()), 
+			newState = new State<PipeBoardGame>(copyBoard(sourceState.getState()), 
 					calCost(newState.getState()), sourceState);
 			
 			newState.getState().getBoardGame()[neighboringStates.get(i).getTileRow()]
@@ -327,15 +327,15 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 
 
 	
-	protected PipeBoardGame copyBoard(MyTile[][] myTiles) {
+	protected PipeBoardGame copyBoard(PipeBoardGame anotherBoard) {
 		
-		MyTile[][] copyTiles = new MyTile[myTiles.getNumberOfColumns()][myTiles.getNumberOfRows()];
-		MyTile source = myTiles.findSource(myTiles.getTiles());
-		MyTile goal = myTiles.findGoal(myTiles.getTiles());
-		MyTile current = myTiles.getSource();
+		MyTile[][] copyTiles = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
+		MyTile source = anotherBoard.findSource(anotherBoard.getTiles());
+		MyTile goal = anotherBoard.findGoal(anotherBoard.getTiles());
+		MyTile current = anotherBoard.getSource();
 		
-		return new PipeBoardGame(copyTiles, myTiles.getNumberOfColumns(), 
-				myTiles.getNumberOfRows(), source, goal, current);
+		return new PipeBoardGame(copyTiles, anotherBoard.getNumberOfColumns(), 
+				anotherBoard.getNumberOfRows(), source, goal, current);
 	}
 	
 
