@@ -1,4 +1,4 @@
-package server;
+package test;
 
 //Our HillClimbing, need to check more games
 

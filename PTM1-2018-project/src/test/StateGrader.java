@@ -1,4 +1,4 @@
-package server;
+package test;
 
 interface StateGrader<T>{
 	// give a grade to a certain state - how close it is to the solution	
