@@ -28,8 +28,7 @@ public class MyClientHandler implements IClientHandler {
 	//Default C'Tor	- if not provided, we assume that the client wants to solve a PipeBoardGame
 	public MyClientHandler() {
 		this(new MyCacheManager(
-				System.getProperty("user.dir") + "\\pipeSolutions\\", 
-					new Solution()));	
+				System.getProperty("user.dir") + "\\pipeSolutions\\"));	
 		this.searchable = new PipeBoardGame(); 
 	}
 	//C'Tor
@@ -56,8 +55,9 @@ public class MyClientHandler implements IClientHandler {
 			writeSolutionToClient(this.cacheManager.getSolution(this.inputBuffer), bufferWriter);
 		}
 		else {
-			this.getSolver().solve(searchable);
-			writeSolutionToClient()
+			this.solution = this.getSolver().solve(searchable);
+			this.cacheManager.addSolution();
+			writeSolutionToClient();
 		}
 			
 	}

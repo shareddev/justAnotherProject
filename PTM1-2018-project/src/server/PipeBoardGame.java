@@ -27,7 +27,12 @@ public class PipeBoardGame implements ISearchable<PipeBoardGame> {
 		//setting the current tile as Source tile for our future ISearcher algorithms
 		this.setCurrent(this.source);
 	}
-	
+	//Default C'Tor - creating the basic problem
+	public PipeBoardGame() {
+		this("s|g\ndone\n");
+	}
+	//Copy C'tor created for the searching Algorithms, they create
+	//a copy of a PipeBoardGame to save as a path.
 	public PipeBoardGame(MyTile[][] Tiles, int numberOfColumns, 
 			int numberOfRows, MyTile source, MyTile goal, MyTile current) {
 		this.setTiles(tiles);
