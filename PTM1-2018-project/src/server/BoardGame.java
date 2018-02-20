@@ -5,8 +5,7 @@ import java.util.Collection;
 
 //i might be over complicating this, mayne PipeGameBoard is really just enough
 public abstract class BoardGame {
-	//Nathan said that we might want to change the 2-Dim array
-	//what if we have generic besides 2-D?
+	//variables
 	protected MyTile tiles[][];
 	protected MyTile source;
 	protected MyTile goal;

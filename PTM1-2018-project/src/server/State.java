@@ -3,7 +3,8 @@ package server;
 import java.io.Serializable;
 //a State represents an entire board
 //the board will be represented by a String
-public class State<T> implements Comparable<State<T>>, Serializable {
+//Comparable<State<T>>, Serializable 
+public class State<T> implements Comparable<State<T>>{
 	
 	//setting the Serializable version
 	private static final long serialVersionUID = 1L;
