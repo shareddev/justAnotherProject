@@ -17,8 +17,7 @@ public class MySolver<T> implements ISolver<T> {
 	
 	@Override
 	public Solution<T> solve(ISearchable<T> searchable) {
-		
-		return null;
+		return this.solver.solve(searchable);
 	}
 
 

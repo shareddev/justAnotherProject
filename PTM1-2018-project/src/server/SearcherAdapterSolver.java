@@ -1,5 +1,7 @@
 package server;
+
 //The object adapter that bridges between ISearcher to ISolver
+//The ISolver injects the needed algorithm here
 public class SearcherAdapterSolver<T> implements ISolver<T> {
 
 	private ISearcher<T> searcher;
