@@ -192,7 +192,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 	private boolean isCanConnect(MyTile current, MyTile next) {
-		String currentValue = new String(current.getTileValue().tos);
+		String currentValue = new String(current.getTileValue());
 		String nextValue = new String(next.getTileValue());
 		
 		if(currentValue.equals("s") || currentValue.equals("g"))
@@ -236,88 +236,88 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 			//Checking up
 			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
 			{
-				if(nextValue|' || nextValue7' ||nextValueF'|| nextValueg')
+				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F")|| nextValue.equals("g"))
 					return true;
 			}
 		}
 		
-		else if(currentValue'-')
+		else if(currentValue.equals("-"))
 		{
 			//Checking right
-			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
+			if(next.getTileColumn() > current.getTileColumn() && next.getTileRow() == current.getTileRow())
 			{
-				if(nextValue-' || nextValue7' ||nextValueJ'|| nextValues')
+				if(nextValue.equals("-") || nextValue.equals("7") ||nextValue.equals("J") || nextValue.equals("s"))
 					return true;
 			}	
 			//Checking left
-			else if(next.getTileColumn()<current.getTileColumn() && next.getTileRow()==current.getTileRow())
+			else if(next.getTileColumn() < current.getTileColumn() && next.getTileRow() == current.getTileRow())
 			{
-				if(nextValue-' || nextValueL' ||nextValueF'|| nextValues')
+				if(nextValue.equals("-") || nextValue.equals("L") || nextValue.equals("F")|| nextValue.equals("s"))
 					return true;
 			}
 		}
-		else if(currentValue'F')
+		else if(currentValue.equals("F"))
 		{
 			//Checking right
-			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
+			if(next.getTileColumn() > current.getTileColumn() && next.getTileRow() == current.getTileRow())
 			{
-				if(nextValue-' || nextValue7' ||nextValueJ'|| nextValueg')
+				if(nextValue.equals("-") || nextValue.equals("7") || nextValue.equals("J") || nextValue.equals("g"))
 					return true;
 			}
 			
 			//Checking down
-			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()>current.getTileRow())
+			else if(next.getTileColumn() == current.getTileColumn() && next.getTileRow() > current.getTileRow())
 			{
-				if(nextValue|' || nextValueL' ||nextValueJ'|| nextValueg')
+				if(nextValue.equals("|") || nextValue.equals("L") || nextValue.equals("J") || nextValue.equals("g"))
 					return true;
 			}
 		}
 		
-		else if(currentValue'L')
+		else if(currentValue.equals("L"))
 		{
 			//Checking right
-			if(next.getTileColumn()>current.getTileColumn() && next.getTileRow()==current.getTileRow())
+			if(next.getTileColumn() > current.getTileColumn() && next.getTileRow() == current.getTileRow())
 			{
-				if(nextValue-' || nextValue7' ||nextValueJ'|| nextValueg')
+				if(nextValue.equals("-") || nextValue.equals("7") || nextValue.equals("J") || nextValue.equals("g"))
 					return true;
 			}
 			
 			//Checking up
 			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
 			{
-				if(nextValue|' || nextValue7' ||nextValueF'|| nextValueg')
+				if(nextValue.equals("|") || nextValue.equals("7") || nextValue.equals("F") || nextValue.equals("g"))
 					return true;
 			}
 		}
 		
-		else if(currentValue'7')
+		else if(currentValue.equals("7"))
 		{
 			//Checking left
-			if(neighbor.getCol()<currentTile.getCol() && neighbor.getRow()==currentTile.getRow())
+			if(next.getTileColumn() < current.getTileColumn() && next.getTileRow() == current.getTileRow())
 			{
-				if(neighbor.getValue()=='-' || neighbor.getValue()=='L' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
+				if(next.getTileValue()=='-' || next.getTileValue()=='L' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
 					return true;
 			}
 			//Checking down
-			else if(neighbor.getCol()==currentTile.getCol() && neighbor.getRow()>currentTile.getRow())
+			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()>current.getTileRow())
 			{
-				if(neighbor.getValue()=='|' || neighbor.getValue()=='L' || neighbor.getValue()=='J'|| neighbor.getValue()=='g')
+				if(next.getTileValue()=='|' || next.getTileValue()=='L' || next.getTileValue()=='J'|| next.getTileValue()=='g')
 					return true;
 			}
 		}
 		
-		else if(currentTile.getValue()=='J')
+		else if(current.getTileValue()=='J')
 		{
 			//Checking left
-			if(neighbor.getCol()<currentTile.getCol() && neighbor.getRow()==currentTile.getRow())
+			if(next.getTileColumn()<current.getTileColumn() && next.getTileRow()==current.getTileRow())
 			{
-				if(neighbor.getValue()=='-' || neighbor.getValue()=='L' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
+				if(next.getTileValue()=='-' || next.getTileValue()=='L' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
 					return true;
 			}
 			//Checking up
-			else if(neighbor.getCol()==currentTile.getCol() && neighbor.getRow()<currentTile.getRow())
+			else if(next.getTileColumn()==current.getTileColumn() && next.getTileRow()<current.getTileRow())
 			{
-				if(neighbor.getValue()=='|' || neighbor.getValue()=='7' ||neighbor.getValue()=='F'|| neighbor.getValue()=='g')
+				if(next.getTileValue()=='|' || next.getTileValue()=='7' ||next.getTileValue()=='F'|| next.getTileValue()=='g')
 					return true;
 			}
 			
