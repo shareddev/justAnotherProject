@@ -55,9 +55,7 @@ public class State<T> implements Comparable<State<T>>, Serializable {
 	public void setCameFrom(State<T> cameFrom) {
 		this.cameFrom = cameFrom;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+
 	@Override
 	public String toString() {
 		return this.state.toString();
