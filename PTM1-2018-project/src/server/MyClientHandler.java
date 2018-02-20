@@ -30,7 +30,7 @@ public class MyClientHandler implements IClientHandler {
 		this(new MyCacheManager(
 				System.getProperty("user.dir") + "\\pipeSolutions\\", 
 					new Solution()));	
-		this.searchable = new PipeGameBoard(); 
+		this.searchable = ; 
 	}
 	//C'Tor
 	public MyClientHandler(ICacheManager cacheManager) {
