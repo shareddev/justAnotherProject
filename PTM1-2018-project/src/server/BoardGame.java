@@ -75,12 +75,12 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		return this.numberOfColumns;
 	}
 	//Setters
-	public void setCurrentTile(MyTile newCurrent) {
+	protected void setCurrentTile(MyTile newCurrent) {
 		this.current = newCurrent;
 	}
 	
 	//setting the Start MyTile and Goal MyTile
-	private void setStartAndGoal() {
+	protected void setStartAndGoal() {
 		this.tiles = new MyTile[this.numberOfColumns][this.numberOfRows];
 		for (int i = 0; i < this.numberOfRows; i++) {
 			for (int j = 0; j < this.numberOfColumns ; j++) {
@@ -187,7 +187,9 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 
-	private boolean isCanConnect(MyTile current, MyTile next) {
+	protected abstract boolean isCanConnect(MyTile current, MyTile next);
+	/*
+	{
 		String currentValue = new String(current.getTileValue());
 		String nextValue = new String(next.getTileValue());
 		
@@ -321,7 +323,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		return false;
 	}
 
-
+*/
 
 
 
@@ -372,16 +374,35 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 
 
 
-	private BoardGame copyBoard(BoardGame anotherBoard) {
+	protected BoardGame copyBoard(BoardGame anotherBoard)
+	/*
+	{
 		String boardString = this.toString();
 		BoardGame boardCopy;
 		
-		MyTile[][] copyTile = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
+		MyTile[][] copyTiles = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
 		MyTile source = anotherBoard.findSource(anotherBoard.getBoardGame());
 		MyTile goal = anotherBoard.findGoal(anotherBoard.getBoardGame());
 		MyTile current = anotherBoard.getSource();
-		return boardCopy;
+		
+		for (int i = 0; i < anotherBoard.getNumberOfRows(); i++) {
+			for (int j = 0; j < anotherBoard.getNumberOfColumns(); j++) {
+				copyTiles[j][i] = new MyTile(anotherBoard.getBoardGame()[j][i].getTileColumn(), anotherBoard.getBoardGame()[j][i].getTileRow(), anotherBoard.getBoardGame()[j][i].getTileValue());
+				
+			}
+		}
+		
+		
+		return new BoardGame(copyTiles, anotherBoard.getNumberOfColumns(), anotherBoard.getNumberOfRows(), source, goal, current);
 	}
+
+
+*/
+
+
+	protected abstract MyTile findSource(MyTile[][] boardGame);
+
+	protected abstract MyTile findGoal(MyTile[][] boardGame);
 
 
 
