@@ -66,19 +66,52 @@ public class MyClientHandler implements IClientHandler {
 		String[] splitter1 = solution.split("\n");
 		String[] splitter2 = this.inputBuffer.split("\n");
 		String rotations = new String("");
-		//collumns
 		for (int i = 0; i < splitter1.length ; i++) {
-			//rows
 			for (int j = 0; j < splitter2[0].length(); j++) {
-				if (splitter1[i].charAt(j) != splitter2[i].charAt(j)) {
-					if(splitter1[i].charAt(j) == '|' || splitter1[i].charAt(j) == '-') {
-						
+				if (splitter1[j].charAt(i) != splitter2[j].charAt(i)) {
+					if(splitter1[j].charAt(i) == '|' || splitter1[j].charAt(i) == '-') {
+						rotations = rotations.concat(j + "," + i + "," + "1" + "\n");
+					}
+					else {
+						rotations = rotations.concat(j + "," + i + "," + curvedRotations(splitter1[j]
+								.charAt(i), splitter2[j].charAt(i)) + "\n");
 					}
 				}
 			}
 		}
 		rotations = rotations.concat("done\n");
 		return rotations;
+	}
+	private int curvedRotations(char correct, char wrong) {
+		// j = 1, l = 2, f = 3, 7 = d
+		int count = 0;
+		while (correct != wrong) {
+			count++;
+			switch (wrong) {
+			case 'j':
+			case 'J':
+				wrong = 'l';
+				break;
+
+			case 'l':
+			case 'L':
+				wrong = 'f';
+				break;
+				
+			case 'f':
+			case 'F':
+				wrong = '7';
+				break;
+				
+			case '7':
+				wrong = 'j';
+				break;
+				
+			default:
+				return count;
+			}
+		}
+		return count;
 	}
 	/*
 	* 1 - Curved Pipes: 'L', 'F', '7', 'J'
