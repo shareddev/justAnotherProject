@@ -1,6 +1,9 @@
 package server;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 
 public class MyCacheManager implements ICacheManager {
@@ -32,15 +35,20 @@ public class MyCacheManager implements ICacheManager {
 	}
 	
 	//
+	@SuppressWarnings("resource")
 	@Override
 	public void loadSolutions() {
 		File solutionFilePath = new File(this.filePath);
 		File[] filesArray = solutionFilePath.listFiles();
 		
 		for (int i = 0; i < filesArray.length; i++) {
-			this.solutions.put(filesArray[i].getName().
-					substring(0, filesArray[i].getName().length()-4),
-			filesArray[i]);
+			try {
+				this.solutions.put(filesArray[i].getName().
+						substring(0, filesArray[i].getName().length()-4),
+						new BufferedReader(new FileReader(filesArray[i])).toString());
+				
+			} catch (FileNotFoundException e) {
+			};
 		}
 	}
 	@Override
