@@ -52,19 +52,8 @@ public class MyCacheManager implements ICacheManager {
 		}
 	}
 	@Override
-	public void saveSolution(Solution solution) {
-		
-	}
-	@Override
 	public String getSolution(String key) {
-		if (isExistSolution(key))
-			FileReader(this.filePath);
-					this.solutions.get(key);
-		else return null;
-	}
-	@Override
-	public void addSolution(String key, Solution solution) {
-		
+		return this.solutions.get(key).toString();
 	}
 
 }
