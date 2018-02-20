@@ -29,7 +29,7 @@ public class MyClientHandler implements IClientHandler {
 	public MyClientHandler() {
 		this(new MyCacheManager(
 				System.getProperty("user.dir") + "\\pipeSolutions\\", 
-					new Solution<String>()));	
+					new Solution<PipeGameBoard>()));	
 		this.searchable = new PipeGameBoard(); 
 	}
 	//C'Tor
@@ -111,7 +111,7 @@ public class MyClientHandler implements IClientHandler {
 	//converts a boardGame to a unique String identifier to make sure
 	//we're talking about the same game when sending to the ICacheManager
 	public String stringToUnique(String string) {
-		
+		return 
 	}
 
 }
