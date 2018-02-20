@@ -7,5 +7,5 @@ public interface ISearchable<T> {
 	public State<? extends BoardGame> getInitialState();
 	public boolean getGoalState(State<T> goalState);
 	public Collection<State<T>> getAllStates(State<T> allStates);
-	public String stringToUnique(String inputBuffer);
+	public String getStringUniqueId(String inputBuffer);
 }

@@ -53,7 +53,7 @@ public class MyClientHandler implements IClientHandler {
 		//we're using the stringToUnique via the ISearchable because the uniqueness of the string
 		//is determined by the values the tiles in the board hold, thus the kind of Game will
 		//decide how to recognize each tile.
-		String uniqueCheck = this.searchable.stringToUnique(this.inputBuffer);
+		String uniqueCheck = this.searchable.getStringUniqueId(this.inputBuffer);
 		
 		//we are sending the board the client provided to check if there's
 		//a stored solution, if it exists we return the solution, otherwise
@@ -111,7 +111,7 @@ public class MyClientHandler implements IClientHandler {
 	//converts a boardGame to a unique String identifier to make sure
 	//we're talking about the same game when sending to the ICacheManager
 	public String stringToUnique(String string) {
-		return 
+		return this.searchable.getStringUniqueId(string);
 	}
 
 }

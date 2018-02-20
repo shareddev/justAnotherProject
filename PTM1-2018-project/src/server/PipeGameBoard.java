@@ -220,7 +220,7 @@ public class PipeGameBoard extends BoardGame {
 	* 6 - End of line: '\n'
 	*/
 	@Override
-	public String stringToUnique(String inputBuffer) {
+	public String getStringUniqueId(String inputBuffer) {
 		//splitting the inputBuffer from the client to an array of Strings
 		//Each String in the array hold a single row.
 		//The last String in the array holds "done".
