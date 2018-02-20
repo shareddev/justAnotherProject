@@ -160,15 +160,14 @@ public class PipeGameBoard extends BoardGame {
 
 	@Override
 	protected BoardGame copyBoard(BoardGame anotherBoard) 	{
-		String boardString = this.toString();
-		BoardGame boardCopy;
 		
 		MyTile[][] copyTiles = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
 		MyTile source = anotherBoard.findSource(anotherBoard.getTiles());
 		MyTile goal = anotherBoard.findGoal(anotherBoard.getTiles());
 		MyTile current = anotherBoard.getSource();
 		
-		return new PipeGameBoard(copyTiles, anotherBoard.getNumberOfColumns(), anotherBoard.getNumberOfRows(), source, goal, current);
+		return new PipeGameBoard(copyTiles, anotherBoard.getNumberOfColumns(), 
+				anotherBoard.getNumberOfRows(), source, goal, current);
 	}
 
 
@@ -192,18 +191,10 @@ public class PipeGameBoard extends BoardGame {
 	}
 
 
-	@Override
-	public State<BoardGame> getInitialState() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
-	@Override
-	public boolean isGoalState(State<BoardGame> goalState) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
+
 
 
 	

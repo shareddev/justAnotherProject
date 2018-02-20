@@ -47,6 +47,7 @@ public class MyClientHandler implements IClientHandler {
 		//other people from class said it's better to use PrintWriter, need to test
 		bufferWriter = new PrintWriter(new OutputStreamWriter(output));
 		
+		//need to talk with Nathan, should we surround with exception?
 		//converting the bufferReader to a string
 		this.inputBuffer = bufferedToString(bufferReader);
 		

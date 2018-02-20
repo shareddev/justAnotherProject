@@ -149,6 +149,22 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		return string;
 	}
 	
+	@Override
+	public boolean isGoalState(State<BoardGame> goalState) {
+		ArrayList<MyTile> neighbors = new ArrayList<MyTile>(this.getNeighboringTiles(this.getSource()));
+		for (int i = 0; i < neighbors.size() ; i++) {
+			if(isExistSourceToGoalPath())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public State<BoardGame> getInitialState() {
+		return this
+		return null;
+	}
+	
 	//getting all possible states that our board can produce
 	@Override
 	public Collection<State<BoardGame>> getAllStates(
