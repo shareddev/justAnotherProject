@@ -62,7 +62,7 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 	public MyTile getGoal() {
 		return this.goal;
 	}
-	public MyTile getStart() {
+	public MyTile getSource() {
 		return this.source;
 	}
 	public MyTile getCurrent() {
@@ -377,7 +377,9 @@ public abstract class BoardGame implements ISearchable<BoardGame> {
 		BoardGame boardCopy;
 		
 		MyTile[][] copyTile = new MyTile[anotherBoard.getNumberOfColumns()][anotherBoard.getNumberOfRows()];
-		MyTile 
+		MyTile source = anotherBoard.findSource(anotherBoard.getBoardGame());
+		MyTile goal = anotherBoard.findGoal(anotherBoard.getBoardGame());
+		MyTile current = anotherBoard.getSource();
 		return boardCopy;
 	}
 
