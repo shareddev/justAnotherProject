@@ -67,7 +67,7 @@ public class MyClientHandler implements IClientHandler {
 			
 	}
 	//converts the changes that we need to make
-	private String getRequiredChanges(String solution2) {
+	private String getRequiredChanges(String solution) {
 		String changes = new String("");
 		
 	}
